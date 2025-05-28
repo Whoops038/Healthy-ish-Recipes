@@ -132,6 +132,27 @@
             background-color: #ff704d;
             color: white;
         }
+        .fixed-bottom-text {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 6px 0;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+  z-index: 9999;
+  margin: 0;
+}
+.fixed-bottom-text a {
+  color: #555;
+  text-decoration: none;
+}
+.fixed-bottom-text a:hover,
+.fixed-bottom-text a:focus {
+  text-decoration: underline;
+}
     </style>
 </head>
 <body>
@@ -354,7 +375,7 @@
         loadComments();
     </script>
     <div id="pd-link-container">
-        <p><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
+        <p class="fixed-bottom-text"><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
     </div>
 </body>
 </html>
