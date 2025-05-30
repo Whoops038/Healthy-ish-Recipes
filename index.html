@@ -4,13 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Recipe Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.basic.min.js"></script>
-
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet"> <!-- Updated font link -->
 </head>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
-</style>
 <body>
   <header>
     <h1>Healthy-ish Recipes</h1>
@@ -21,58 +17,35 @@
     <input type="text" id="search" placeholder="Search for recipes..." />
   </div>
   
- <nav>
-  <div class="recipe">
-    <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
-    <p>A quick and easy dessert made in the microwave with ripe bananas.</p>
-  </div>
-  <div class="recipe">
-    <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
-    <p>A healthy twist on the classic tiramisu using rice cakes and yogurt.</p>
-  </div>
-  <div class="recipe">
-    <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
-    <p>A delicious vegan alternative to scrambled eggs made with tofu.</p>
-  </div>
-</nav>
+  <nav>
+    <div class="recipe">
+      <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
+      <p>A quick and easy dessert made in the microwave with ripe bananas.</p>
+    </div>
+    <div class="recipe">
+      <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
+      <p>A healthy twist on the classic tiramisu using rice cakes and yogurt.</p>
+    </div>
+    <div class="recipe">
+      <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
+      <p>A delicious vegan alternative to scrambled eggs made with tofu.</p>
+    </div>
+  </nav>
 
-<script>
-  const recipesData = [
-    { title: "Microwave Banana Blondie", link: "MicrowaveBananaBlondie.html", description: "A quick and easy dessert made in the microwave with ripe bananas." },
-    { title: "Rice Cake & Yogurt 'Tiramisu'", link: "Tiricemisu.html", description: "A healthy twist on the classic tiramisu using rice cakes and yogurt." },
-    { title: "Vegan Scrambled 'Egg'", link: "VScrEgg.html", description: "A delicious vegan alternative to scrambled eggs made with tofu." }
-  ];
+  <script>
+    document.getElementById('search').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const recipes = document.querySelectorAll('.recipe');
 
-  const options = {
-    keys: ['title'],
-    threshold: 0.3 // Adjust this value for more or less strict matching
-  };
-  const fuse = new Fuse(recipesData, options);
-
-  const recipes = document.querySelectorAll('.recipe');
-  recipes.forEach(recipe => {
-    recipe.style.display = 'block'; 
-  });
-
-  document.getElementById('search').addEventListener('input', function() {
-    const searchTerm = this.value.trim();
-    console.log("Search Term:", searchTerm);
-    const results = fuse.search(searchTerm);
-    console.log("Search Results:", results);
-
-    recipes.forEach(recipe => {
-      recipe.style.display = 'none'; 
+      recipes.forEach(recipe => {
+        const title = recipe.querySelector('a').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          recipe.style.display = 'block';
+        } else {
+          recipe.style.display = 'none';
+        }
+      });
     });
-
-    results.forEach(result => {
-      const recipe = result.item;
-      const recipeElement = document.querySelector(`.recipe a[href="${recipe.link}"]`).parentElement;
-      recipeElement.style.display = 'block'; 
-    });
-  });
-</script>
-
-
-
+  </script>
 </body>
 </html>
