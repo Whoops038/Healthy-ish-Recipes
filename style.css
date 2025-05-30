@@ -18,12 +18,12 @@ header {
 }
 
 header h1 {
-  font-family: 'Breathin', cursive; /* Updated font */
+  font-family: 'Breathine', cursive;
   font-weight: 700;
   font-size: 2.8rem;
   color: #ff704d;
   margin: 0;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 3px;
 }
 
