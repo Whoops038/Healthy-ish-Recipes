@@ -31,5 +31,21 @@
       <p>A delicious vegan alternative to scrambled eggs made with tofu.</p>
     </div>
   </nav>
+  <script>
+  document.getElementById('search').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const recipes = document.querySelectorAll('.recipe');
+
+    recipes.forEach(recipe => {
+      const title = recipe.querySelector('a').textContent.toLowerCase();
+      if (title.includes(searchTerm)) {
+        recipe.style.display = 'block';
+      } else {
+        recipe.style.display = 'none';
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
