@@ -17,6 +17,12 @@ header {
   text-align: center;
 }
 
+.comforter-brush-regular {
+  font-family: "Comforter Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 header h1 {
   font-family: 'Comforter Brush', cursive;
   font-weight: 700;
