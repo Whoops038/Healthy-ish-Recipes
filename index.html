@@ -36,19 +36,30 @@
   </nav>
 
   <script>
-    document.getElementById('search').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const recipes = document.querySelectorAll('.recipe');
+  document.getElementById('search').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase().trim();
+    const recipes = document.querySelectorAll('.recipe');
 
-      recipes.forEach(recipe => {
-        const title = recipe.querySelector('a').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
-          recipe.style.display = 'block';
-        } else {
-          recipe.style.display = 'none';
-        }
-      });
+    recipes.forEach(recipe => {
+      const title = recipe.querySelector('a').textContent.toLowerCase();
+      // Check if the title includes the search term or if the search term is a substring of the title
+      if (title.includes(searchTerm) || isFuzzyMatch(title, searchTerm)) {
+        recipe.style.display = 'block';
+      } else {
+        recipe.style.display = 'none';
+      }
     });
-  </script>
+  });
+
+  function isFuzzyMatch(title, searchTerm) {
+    const titleWords = title.split(' ');
+    const searchWords = searchTerm.split(' ');
+
+    // Check if all search words are present in the title
+    return searchWords.every(searchWord => {
+      return titleWords.some(titleWord => titleWord.includes(searchWord));
+    });
+  }
+</script>
 </body>
 </html>
