@@ -1,116 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
 
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #fffaf0;
-  color: #4a4a4a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  min-height: 100vh;
+margin: 0;
+font-family: 'Poppins', sans-serif;
+background-color: #fffaf0;
+color: #4a4a4a;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 2rem;
+min-height: 100vh;
 }
 
 header {
-  margin-bottom: 1.5rem;
-  text-align: center;
+margin-bottom: 1.5rem;
+text-align: center;
 }
 
 header h1 {
-  font-family: "Comforter Brush", cursive;
-  font-weight: 700;
-  font-size: 2.8rem;
-  color: #ff704d;
-  margin: 0;
-  text-transform: lowercase;
-  letter-spacing: 3px;
+font-weight: 700;
+font-size: 2.8rem;
+color: #ff704d;
+margin: 0;
+letter-spacing: 3px;
 }
 
 header p {
-  font-weight: 400;
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0.5rem auto 2rem;
-  color: #666666;
-  line-height: 1.5;
+font-weight: 400;
+font-size: 1.2rem;
+max-width: 600px;
+margin: 0.5rem auto 2rem;
+color: #666666;
+line-height: 1.5;
 }
 
 .search-container {
-  margin-bottom: 2rem;
+margin-bottom: 2rem;
 }
 
 #search {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+padding: 0.5rem;
+font-size: 1rem;
+border: 1px solid #ccc;
+border-radius: 4px;
 }
 
-nav.alphabet-nav {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-nav.alphabet-nav a {
-  margin: 0 5px;
-  text-decoration: none;
-  color: #ff704d;
-  font-weight: 600;
-}
-
-nav.alphabet-nav a:hover {
-  color: #cc512d;
-}
-
-.recipes {
-  max-width: 700px;
-  margin: 0 auto;
+nav {
+max-width: 700px;
+margin: 0 auto;
 }
 
 .recipe {
-  margin-bottom: 1.5rem;
+margin-bottom: 1.5rem;
 }
 
 nav a {
-  display: block;
-  margin: 8px 0;
-  text-decoration: none;
-  color: #ff704d;
-  font-weight: 600;
-  font-size: 1.1rem;
-  border-bottom: 2px solid transparent;
-  padding-bottom: 2px;
-  transition: color 0.3s ease, border-color 0.3s ease;
-  cursor: pointer;
+display: block;
+margin: 8px 0;
+text-decoration: none;
+color: #ff704d;
+font-weight: 600;
+font-size: 1.1rem;
+border-bottom: 2px solid transparent;
+padding-bottom: 2px;
+transition: color 0.3s ease, border-color 0.3s ease;
+cursor: pointer;
 }
 
 nav a:hover,
 nav a:focus {
-  color: #cc512d;
-  border-color: #cc512d;
-}
-
-.back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #ff704d;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.back-to-top:hover {
-  background-color: #cc512d;
+color: #cc512d;
+border-color: #cc512d;
 }
 
 @media (max-width: 480px) {
-  header h1 {
-    font-size: 2rem;
-  }
-  nav a {
-    font-size: 1rem;
-  }
+header h1 {
+font-size: 2rem;
+}
+nav a {
+font-size: 1rem;
+}
 }
