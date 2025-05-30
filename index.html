@@ -36,7 +36,7 @@
   </div>
 </nav>
 
- <script>
+<script>
   const recipesData = [
     { title: "Microwave Banana Blondie", link: "MicrowaveBananaBlondie.html", description: "A quick and easy dessert made in the microwave with ripe bananas." },
     { title: "Rice Cake & Yogurt 'Tiramisu'", link: "Tiricemisu.html", description: "A healthy twist on the classic tiramisu using rice cakes and yogurt." },
@@ -45,7 +45,7 @@
 
   const options = {
     keys: ['title'],
-    threshold: 0.3 // Adjust  value for more/less strict matching
+    threshold: 0.3 // Adjust this value for more or less strict matching
   };
   const fuse = new Fuse(recipesData, options);
 
@@ -56,7 +56,9 @@
 
   document.getElementById('search').addEventListener('input', function() {
     const searchTerm = this.value.trim();
+    console.log("Search Term:", searchTerm);
     const results = fuse.search(searchTerm);
+    console.log("Search Results:", results);
 
     recipes.forEach(recipe => {
       recipe.style.display = 'none'; 
