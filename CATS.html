@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Nyan Cat Float</title>
+<title>CATCHAOS</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
 
@@ -36,7 +36,6 @@
     will-change: transform;
   }
 
-  /* Sparkle trail behind nyan cats */
   .sparkle {
     position: absolute;
     width: 20px;
@@ -55,7 +54,6 @@
     100% {opacity: 0.7; transform: scale(1);}
   }
 
-  /* Controls panel */
   #controls {
     position: fixed;
     top: 15px;
@@ -87,7 +85,7 @@
     outline: none;
   }
 
-  /* Speed slider styles */
+ 
   #speedControl {
     display: flex;
     align-items: center;
@@ -100,7 +98,6 @@
     width: 120px;
   }
 
-  /* Annihilate image */
   #annihilate-image {
     position: fixed;
     top: 50%;
@@ -116,7 +113,7 @@
     z-index: 2000;
   }
 
-  /* Background instruction text */
+  
   #bg-instruction {
     position: fixed;
     top: 50%;
@@ -155,11 +152,10 @@
 
 <audio id="background-audio" autoplay loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/10/22/audio_0421630233.mp3?filename=nyan-cat-12888.mp3" type="audio/mpeg" />
-  Your browser does not support the audio element.
 </audio>
 
 <script>
-  const nyanCatSrc = "https://i.imgur.com/j3GqGpI.png";
+  const nyanCatSrc = "nc-removebg-preview.png";
   const container = document.getElementById('container');
   const annihilateImage = document.getElementById('annihilate-image');
   const audio = document.getElementById('background-audio');
@@ -171,10 +167,9 @@
   let nyanCats = [];
   let animationId = null;
   let animationRunning = true;
-  let animationSpeedMultiplier = 1; // Global speed multiplier
+  let animationSpeedMultiplier = 1; 
   let musicPlaying = true;
 
-  // Utility fn for random range
   function randomRange(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -202,39 +197,29 @@
     }
 
     reset() {
-      // Randomize starting position inside viewport width and height
       this.x = randomRange(0, this.containerW - 80);
       this.y = randomRange(0, this.containerH - 60);
-      // Random angle movement direction in radians
       this.angle = randomRange(0, 2 * Math.PI);
-      // Base speed px/s (will be multiplied by global)
       this.baseSpeed = randomRange(30, 80);
       this.speed = this.baseSpeed * animationSpeedMultiplier;
       this.amplitude = randomRange(10, 30);
       this.frequency = randomRange(0.002, 0.006);
       this.phase = randomRange(0, Math.PI * 2);
       this.startTime = performance.now();
-      // For bouncing inside container
       this.vx = Math.cos(this.angle) * this.speed;
       this.vy = Math.sin(this.angle) * this.speed;
     }
 
     update(time) {
       if (!animationRunning) return;
-      const deltaTime = 16.67; // approx ms per frame at 60fps
-
-      // Update speed with multiplier
+      const deltaTime = 16.67;
       this.speed = this.baseSpeed * animationSpeedMultiplier;
-      // Update velocity vector accordingly
       const angle = Math.atan2(this.vy, this.vx);
       this.vx = Math.cos(angle) * this.speed;
       this.vy = Math.sin(angle) * this.speed;
-
-      // Update position with velocity (px/frame)
       this.x += this.vx * (deltaTime / 1000);
       this.y += this.vy * (deltaTime / 1000);
 
-      // Bounce off edges
       if (this.x < 0) {
         this.x = 0;
         this.vx = Math.abs(this.vx);
@@ -250,13 +235,9 @@
         this.vy = -Math.abs(this.vy);
       }
 
-      // Small vertical oscillation (floating effect)
       const elapsed = (time - this.startTime) / 1000;
       const floatY = 3 * Math.sin(elapsed * 10 + this.phase);
-
       this.elem.style.transform = `translate(${this.x}px, ${this.y + floatY}px)`;
-
-      // Update sparkles behind cat
       this.sparkles.forEach((sparkle, i) => {
         const offset = i * 15 + 10;
         const sparkleX = this.x - offset;
@@ -271,20 +252,17 @@
     }
   }
 
-  // Create a new cat and add it to array
   function addCat() {
     const cat = new NyanCat();
     nyanCats.push(cat);
   }
 
-  // Create multiple cats initially
   function createInitialCats(num) {
     for (let i = 0; i < num; i++) {
       addCat();
     }
   }
 
-  // Animation loop
   function animate(time = 0) {
     if (animationRunning) {
       nyanCats.forEach(cat => cat.update(time));
@@ -292,7 +270,6 @@
     }
   }
 
-  // Toggle play/pause animation and audio
   function togglePlay() {
     const btn = document.getElementById('togglePlayBtn');
     if (animationRunning) {
@@ -310,7 +287,6 @@
     }
   }
 
-  // Toggle music play/pause
   function toggleMusic() {
     if (musicPlaying) {
       audio.pause();
@@ -337,15 +313,13 @@
     annihilateImage.style.display = 'block';
   }
 
-  // Redirect to Rick Astley video
   function getRRed() {
     window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   }
 
-  // Increase speed multiplier on body click (except if clicking controls)
   function handleBodyClick(e) {
     if (e.target.closest('#controls')) {
-      return; // ignore clicks on controls area
+      return;
     }
     animationSpeedMultiplier += 0.2;
     if (animationSpeedMultiplier > 3) animationSpeedMultiplier = 3;
@@ -354,20 +328,18 @@
     speedSlider.setAttribute('aria-valuenow', animationSpeedMultiplier.toFixed(1));
   }
 
-  // Speed slider change handler
   function handleSpeedSliderChange(e) {
     animationSpeedMultiplier = parseFloat(e.target.value);
     speedValue.textContent = animationSpeedMultiplier.toFixed(1) + 'x';
     speedSlider.setAttribute('aria-valuenow', animationSpeedMultiplier.toFixed(1));
   }
 
-  // Add new cat on clicking container area (except controls)
   function handleContainerClick(e) {
     if (e.target.closest('#controls')) return;
     addCat();
   }
 
-  // Initial setup
+
   document.getElementById('togglePlayBtn').addEventListener('click', togglePlay);
   document.getElementById('annihilateBtn').addEventListener('click', annihilate);
   document.getElementById('getRRedBtn').addEventListener('click', getRRed);
