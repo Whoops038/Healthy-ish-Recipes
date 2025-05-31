@@ -1,356 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Nyan Cat Float</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recipe Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
 
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ff3cac, #784ba0, #2b86c5);
-    font-family: 'Comic Neue', cursive, sans-serif;
-    position: relative;
-    user-select: none;
-  }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffaf0;
+      color: #4a4a4a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-  #container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    cursor: pointer;
-  }
+    header {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+    }
 
-  .nyan-cat {
-    position: absolute;
-    width: 80px;
-    height: 60px;
-    user-select: none;
-    pointer-events: none;
-    animation-timing-function: linear;
-    will-change: transform;
-  }
+    header h1 {
+      font-family: 'Comforter Brush', cursive;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #ff704d;
+      margin: 0;
+      text-transform: lowercase;
+      letter-spacing: 3px;
+    }
 
-  /* Sparkle trail behind nyan cats */
-  .sparkle {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle at center, #fff, transparent);
-    border-radius: 50%;
-    filter: blur(1px);
-    opacity: 0.7;
-    animation: sparkle-fade 1s infinite;
-    pointer-events: none;
-  }
+    header p {
+      font-weight: 400;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0.5rem auto 2rem;
+      color: #666666;
+      line-height: 1.5;
+      text-align: center;
+    }
 
-  @keyframes sparkle-fade {
-    0% {opacity: 0.7; transform: scale(1);}
-    50% {opacity: 0.3; transform: scale(0.8);}
-    100% {opacity: 0.7; transform: scale(1);}
-  }
+    .search-container {
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
 
-  /* Controls panel */
-  #controls {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
+    #search {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-  #controls button {
-    padding: 10px 18px;
-    background-color: #ff704d;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    user-select: none;
-    flex-shrink: 0;
-  }
+    nav.alphabet-nav {
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
 
-  #controls button:hover,
-  #controls button:focus {
-    background-color: #cc512d;
-    outline: none;
-  }
+    nav.alphabet-nav a {
+      margin: 0 6px;
+      text-decoration: none;
+      color: #ff704d;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-  /* Speed slider styles */
-  #speedControl {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-    font-weight: 700;
-    user-select: none;
-  }
-  #speedSlider {
-    width: 120px;
-  }
+    nav.alphabet-nav a:hover,
+    nav.alphabet-nav a:focus {
+      color: #fffaf0;
+      background-color: #cc512d;
+      outline: none;
+    }
 
-  /* Annihilate image */
-  #annihilate-image {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 50vw;
-    max-height: 50vh;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    display: none;
-    user-select: none;
-    pointer-events: none;
-    z-index: 2000;
-  }
+    .recipes {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-  /* Background instruction text */
-  #bg-instruction {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    font-size: 3rem;
-    font-weight: 700;
-    color: rgba(200, 200, 200, 0.15);
-    white-space: nowrap;
-    user-select: none;
-    z-index: 1;
-    text-transform: uppercase;
-    letter-spacing: 12px;
-  }
-</style>
+    .recipe {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 10px;
+    }
+
+    .recipe-image {
+      flex-shrink: 0;
+      width: auto;
+      height: 100%;
+      max-height: 100px; 
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .recipe-text {
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .recipe-text p {
+      margin: 0.2rem 0;
+    }
+
+    .recipe-text a {
+      color: #ff704d;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .recipe-text a:hover,
+    .recipe-text a:focus {
+      color: #cc512d;
+      border-color: #cc512d;
+      outline: none;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff704d;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      font-size: 1rem;
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus {
+      background-color: #cc512d;
+      outline: none;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav.alphabet-nav a {
+        font-size: 0.9rem;
+        margin: 0 4px;
+        padding: 2px 5px;
+      }
+      .recipe-text a {
+        font-size: 1rem;
+      }
+      .back-to-top {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .recipe {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .recipe-image {
+        max-height: 150px;
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+      .recipe-text {
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+  </style>
 </head>
-<body>
-<div id="container" aria-label="Nyan cat floating container" tabindex="0"></div>
-
-<div id="bg-instruction" aria-hidden="true">Click screen to spawn cats</div>
-
-<div id="controls" role="region" aria-label="Animation controls">
-  <button id="togglePlayBtn" aria-pressed="true" aria-label="Pause animation">Pause</button>
-  <button id="annihilateBtn" aria-label="Annihilate all nyan cats">Annihilate</button>
-  <button id="getRRedBtn" aria-label="Get RRed button">Get RRed</button>
-  <button id="toggleMusicBtn" aria-pressed="true" aria-label="Pause music">Pause Music</button>
-  <button id="previousBtn" aria-label="Go to Home Page">Previous</button>
-  <div id="speedControl">
-    <label for="speedSlider" style="color: white;">Speed:</label>
-    <input type="range" id="speedSlider" min="0.5" max="3" step="0.1" value="1" aria-valuemin="0.5" aria-valuemax="3" aria-valuenow="1" aria-label="Speed control slider"/>
-    <span id="speedValue" style="color: white; min-width: 30px;">1.0x</span>
+<body id="top">
+  <header>
+    <h1>Healthy-ish Recipes</h1>
+    <p>Food but healthier</p>
+  </header>
+  
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search for recipes..." aria-label="Search recipes" />
   </div>
-</div>
 
-<img id="annihilate-image" src="boom.png" />
+  <nav class="alphabet-nav" aria-label="Recipe alphabetical navigation">
+    <a href="#A">A</a>
+    <a href="#B">B</a>
+    <a href="#C">C</a>
+    <a href="#D">D</a>
+    <a href="#E">E</a>
+    <a href="#F">F</a>
+    <a href="#G">G</a>
+    <a href="#H">H</a>
+    <a href="#I">I</a>
+    <a href="#J">J</a>
+    <a href="#K">K</a>
+    <a href="#L">L</a>
+    <a href="#M">M</a>
+    <a href="#N">N</a>
+    <a href="#O">O</a>
+    <a href="#P">P</a>
+    <a href="#Q">Q</a>
+    <a href="#R">R</a>
+    <a href="#S">S</a>
+    <a href="#T">T</a>
+    <a href="#U">U</a>
+    <a href="#V">V</a>
+    <a href="#W">W</a>
+    <a href="#X">X</a>
+    <a href="#Y">Y</a>
+    <a href="#Z">Z</a>
+  </nav>
 
-<audio id="background-audio" autoplay loop>
-  <source src="catnyanmusic.mp3" />
-</audio>
+  <div class="recipes">
+    <div class="recipe" id="M">
+      <img src="MBnBlondie.png" class="recipe-image" />
+      <div class="recipe-text">
+        <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
+        <p>A quick and easy dessert made in the microwave with ripe bananas.</p>
+      </div>
+    </div>
+    <div class="recipe" id="R">
+      <img src="Tiricemisu.png" class="recipe-image" />
+      <div class="recipe-text">
+        <p><a href="Tiricemisu.html">Rice Cake &amp; Yogurt "Tiramisu"</a></p>
+        <p>A healthy twist on the classic tiramisu using rice cakes and yogurt.</p>
+      </div>
+    </div>
+    <div class="recipe" id="V">
+      <img src="VScrEgg.png" alt="Vegan Scrambled Egg" class="recipe-image" />
+      <div class="recipe-text">
+        <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
+        <p>A delicious vegan alternative to scrambled eggs made with tofu.</p>
+      </div>
+    </div>
+  </div>
 
-<script>
-  const nyanCatSrc = "https://i.imgur.com/j3GqGpI.png";
-  const container = document.getElementById('container');
-  const annihilateImage = document.getElementById('annihilate-image');
-  const audio = document.getElementById('background-audio');
-  const bgInstruction = document.getElementById('bg-instruction');
-  const speedSlider = document.getElementById('speedSlider');
-  const speedValue = document.getElementById('speedValue');
-  const toggleMusicBtn = document.getElementById('toggleMusicBtn');
-  const previousBtn = document.getElementById('previousBtn');
+  <a href="#top" class="back-to-top" aria-label="Back to top">Back to Top</a>
 
-  let nyanCats = [];
-  let animationId = null;
-  let animationRunning = true;
-  let animationSpeedMultiplier = 1;
-  let musicPlaying = true;
-  const maxCats = 100;
+  <script>
+    document.getElementById('search').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const recipes = document.querySelectorAll('.recipe');
 
-  function randomRange(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  class NyanCat {
-    constructor() {
-      this.elem = document.createElement('img');
-      this.elem.src = nyanCatSrc;
-      this.elem.className = 'nyan-cat';
-      this.containerW = container.clientWidth;
-      this.containerH = container.clientHeight;
-      this.reset();
-      container.appendChild(this.elem);
-      this.sparkles = [];
-      this.createSparkles();
-    }
-
-    createSparkles() {
-      for (let i = 0; i < 3; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        this.sparkles.push(sparkle);
-        container.appendChild(sparkle);
-      }
-    }
-
-    reset() {
-      this.x = randomRange(0, this.containerW - 80);
-      this.y = randomRange(0, this.containerH - 60);
-      this.angle = randomRange(0, 2 * Math.PI);
-      this.baseSpeed = randomRange(30, 80);
-      this.speed = this.baseSpeed * animationSpeedMultiplier;
-      this.phase = randomRange(0, Math.PI * 2);
-      this.startTime = performance.now();
-      this.vx = Math.cos(this.angle) * this.speed;
-      this.vy = Math.sin(this.angle) * this.speed;
-    }
-
-    update(time) {
-      if (!animationRunning) return;
-      const deltaTime = 16.67;
-
-      this.speed = this.baseSpeed * animationSpeedMultiplier;
-      const angle = Math.atan2(this.vy, this.vx);
-      this.vx = Math.cos(angle) * this.speed;
-      this.vy = Math.sin(angle) * this.speed;
-
-      this.x += this.vx * (deltaTime / 1000);
-      this.y += this.vy * (deltaTime / 1000);
-
-      if (this.x < 0) {
-        this.x = 0;
-        this.vx = Math.abs(this.vx);
-      } else if (this.x > this.containerW - 80) {
-        this.x = this.containerW - 80;
-        this.vx = -Math.abs(this.vx);
-      }
-      if (this.y < 0) {
-        this.y = 0;
-        this.vy = Math.abs(this.vy);
-      } else if (this.y > this.containerH - 60) {
-        this.y = this.containerH - 60;
-        this.vy = -Math.abs(this.vy);
-      }
-
-      const elapsed = (time - this.startTime) / 1000;
-      const floatY = 3 * Math.sin(elapsed * 10 + this.phase);
-
-      this.elem.style.transform = `translate(${this.x}px, ${this.y + floatY}px)`;
-
-      this.sparkles.forEach((sparkle, i) => {
-        const offset = i * 15 + 10;
-        const sparkleX = this.x - offset;
-        const sparkleY = this.y + 30 + (i % 2) * 5 * Math.sin(elapsed * 15 + i * 2) + floatY;
-        sparkle.style.transform = `translate(${sparkleX}px, ${sparkleY}px)`;
+      recipes.forEach(recipe => {
+        const title = recipe.querySelector('a').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          recipe.style.display = 'flex';
+        } else {
+          recipe.style.display = 'none';
+        }
       });
-    }
-
-    remove() {
-      this.sparkles.forEach(s => container.removeChild(s));
-      container.removeChild(this.elem);
-    }
-  }
-
-  function addCat() {
-    if (nyanCats.length < maxCats) {
-      const cat = new NyanCat();
-      nyanCats.push(cat);
-    }
-  }
-
-  function createInitialCats(num) {
-    for (let i = 0; i < num; i++) {
-      addCat();
-    }
-  }
-
-  function animate(time = 0) {
-    if (animationRunning) {
-      nyanCats.forEach(cat => cat.update(time));
-      animationId = requestAnimationFrame(animate);
-    }
-  }
-
-  function togglePlay() {
-    const btn = document.getElementById('togglePlayBtn');
-    if (animationRunning) {
-      animationRunning = false;
-      cancelAnimationFrame(animationId);
-      btn.textContent = "Play";
-      btn.setAttribute('aria-pressed', 'false');
-      btn.setAttribute('aria-label', 'Play animation');
-    } else {
-      animationRunning = true;
-      btn.textContent = "Pause";
-      btn.setAttribute('aria-pressed', 'true');
-      btn.setAttribute('aria-label', 'Pause animation');
-      animate();
-    }
-  }
-
-  function toggleMusic() {
-    if (musicPlaying) {
-      audio.pause();
-      toggleMusicBtn.textContent = "Play Music";
-      toggleMusicBtn.setAttribute('aria-pressed', 'false');
-      toggleMusicBtn.setAttribute('aria-label', 'Play music');
-      musicPlaying = false;
-    } else {
-      audio.play();
-      toggleMusicBtn.textContent = "Pause Music";
-      toggleMusicBtn.setAttribute('aria-pressed', 'true');
-      toggleMusicBtn.setAttribute('aria-label', 'Pause music');
-      musicPlaying = true;
-    }
-  }
-
-  function annihilate() {
-    animationRunning = false;
-    cancelAnimationFrame(animationId);
-    nyanCats.forEach(cat => cat.remove());
-    nyanCats = [];
-    audio.pause();
-    annihilateImage.style.display = 'block';
-  }
-
-  function getRRed() {
-    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  }
-
-  function goPrevious() {
-    window.location.href = 'index.html';
-  }
-
-  function handleContainerClick(e) {
-    if (e.target.closest('#controls')) return;
-    addCat();
-  }
-
-  function handleSpeedSliderChange(e) {
-    animationSpeedMultiplier = parseFloat(e.target.value);
-    speedValue.textContent = animationSpeedMultiplier.toFixed(1) + 'x';
-    speedSlider.setAttribute('aria-valuenow', animationSpeedMultiplier.toFixed(1));
-  }
-
-  document.getElementById('togglePlayBtn').addEventListener('click', togglePlay);
-  document.getElementById('annihilateBtn').addEventListener('click', annihilate);
-  document.getElementById('getRRedBtn').addEventListener('click', getRRed);
-  toggleMusicBtn.addEventListener('click', toggleMusic);
-  previousBtn.addEventListener('click', goPrevious);
-  speedSlider.addEventListener('input', handleSpeedSliderChange);
-  container.addEventListener('click', handleContainerClick);
-
-  createInitialCats(10);
-  animate();
-</script>
+    });
+  </script>
 </body>
 </html>
