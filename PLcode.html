@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Image Only Page</title>
+  <title>wow</title>
   <style>
     html, body {
       margin: 0;
@@ -14,21 +14,24 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column; /* Stack buttons above the image */
+      flex-direction: column;
+      padding: 1rem;
+      box-sizing: border-box;
     }
     img {
       max-width: 90vw;
-      max-height: 90vh;
+      max-height: 80vh;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      margin-bottom: 25px; /* Space between image and buttons */
+      margin-bottom: 20px; /* Space between image and buttons */
+      display: block;
     }
     .button-container {
       display: flex;
       gap: 10px;
     }
-    .button {
-      padding: 10px 15px;
+    button {
+      padding: 10px 20px;
       background-color: #ff704d;
       color: white;
       border: none;
@@ -37,23 +40,34 @@
       font-size: 1rem;
       transition: background-color 0.3s ease;
     }
-    .button:hover {
+    button:hover, button:focus {
       background-color: #cc512d;
+      outline: none;
     }
   </style>
 </head>
 <body>
   <img src="PLcode.jpeg" alt="paylah QR" />
-  
+
   <div class="button-container">
-    <button class="button" onclick="goBack()">Previous</button>
-    <button class="button" onclick="window.location.href='index.html'">Home</button>
+    <button id="prevBtn" type="button">Previous</button>
+    <button id="homeBtn" type="button">Home</button>
   </div>
 
   <script>
-    function goBack() {
-      window.history.back();
-    }
+    const prevBtn = document.getElementById('prevBtn');
+    prevBtn.addEventListener('click', () => {
+      if (document.referrer !== '') {
+        window.history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    const homeBtn = document.getElementById('homeBtn');
+    homeBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
   </script>
 </body>
 </html>
