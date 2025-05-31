@@ -150,7 +150,7 @@
 <img id="annihilate-image" src=boom.png" />
 
 <audio id="background-audio" autoplay loop>
-  <source src="catnyanmusic.mp3" type="audio/mp3" />
+  <source src="catnyanmusic.mp3" type="main/mp3" />
 </audio>
 
 <script>
@@ -292,21 +292,22 @@
     }
   }
 
-  function toggleMusic() {
-    if (musicPlaying) {
-      audio.pause();
-      toggleMusicBtn.textContent = "Play Music";
-      toggleMusicBtn.setAttribute('aria-pressed', 'false');
-      toggleMusicBtn.setAttribute('aria-label', 'Play music');
-      musicPlaying = false;
-    } else {
-      audio.play();
-      toggleMusicBtn.textContent = "Pause Music";
-      toggleMusicBtn.setAttribute('aria-pressed', 'true');
-      toggleMusicBtn.setAttribute('aria-label', 'Pause music');
-      musicPlaying = true;
-    }
-  }
+   function toggleMusic() {
+     if (musicPlaying) {
+       audio.pause();
+       toggleMusicBtn.textContent = "Play Music";
+       toggleMusicBtn.setAttribute('aria-pressed', 'false');
+       toggleMusicBtn.setAttribute('aria-label', 'Play music');
+       musicPlaying = false;
+     } else {
+       audio.play(); 
+       toggleMusicBtn.textContent = "Pause Music";
+       toggleMusicBtn.setAttribute('aria-pressed', 'true');
+       toggleMusicBtn.setAttribute('aria-label', 'Pause music');
+       musicPlaying = true;
+     }
+   }
+
 
   function annihilate() {
     animationRunning = false;
