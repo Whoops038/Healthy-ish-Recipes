@@ -1,30 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Image Only Page</title>
-<style>
-  html, body {
-    margin: 0;
-    height: 100%;
-    background-color: #f0f0f0;
-  }
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  img {
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image Only Page</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: #f0f0f0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; /* Stack buttons above the image */
+    }
+    img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-bottom: 40px; /* Space between image and buttons */
+    }
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+    .button {
+      padding: 10px 15px;
+      background-color: #ff704d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #cc512d;
+    }
+  </style>
 </head>
 <body>
   <img src="PLcode.jpeg" alt="paylah QR" />
+  
+  <div class="button-container">
+    <button class="button" onclick="goBack()">Previous</button>
+    <button class="button" onclick="window.location.href='index.html'">Home</button>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </body>
 </html>
-
