@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CATCHAOS</title>
+<title>CAT CHAOS</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
 
@@ -85,7 +85,6 @@
     outline: none;
   }
 
- 
   #speedControl {
     display: flex;
     align-items: center;
@@ -113,7 +112,6 @@
     z-index: 2000;
   }
 
-  
   #bg-instruction {
     position: fixed;
     top: 50%;
@@ -141,6 +139,7 @@
   <button id="annihilateBtn" aria-label="Annihilate all nyan cats">Annihilate</button>
   <button id="getRRedBtn" aria-label="Get RRed button">Get RRed</button>
   <button id="toggleMusicBtn" aria-pressed="true" aria-label="Pause music">Pause Music</button>
+  <button id="previousBtn" aria-label="Go to Home Page">Previous</button>
   <div id="speedControl">
     <label for="speedSlider" style="color: white;">Speed:</label>
     <input type="range" id="speedSlider" min="0.5" max="3" step="0.1" value="1" aria-valuemin="0.5" aria-valuemax="3" aria-valuenow="1" aria-label="Speed control slider"/>
@@ -148,14 +147,14 @@
   </div>
 </div>
 
-<img id="annihilate-image" src="boom.png" />
+<img id="annihilate-image" src=boom.png" />
 
 <audio id="background-audio" autoplay loop>
-  <source src="catnyanmusic.mp3" />
+  <source src="catnyan,usic.mp3" type="audio/mpeg" />
 </audio>
 
 <script>
-  const nyanCatSrc = "nc-removebg-preview.png";
+  const nyanCatSrc = "https://i.imgur.com/j3GqGpI.png";
   const container = document.getElementById('container');
   const annihilateImage = document.getElementById('annihilate-image');
   const audio = document.getElementById('background-audio');
@@ -163,12 +162,14 @@
   const speedSlider = document.getElementById('speedSlider');
   const speedValue = document.getElementById('speedValue');
   const toggleMusicBtn = document.getElementById('toggleMusicBtn');
+  const previousBtn = document.getElementById('previousBtn');
 
   let nyanCats = [];
   let animationId = null;
   let animationRunning = true;
-  let animationSpeedMultiplier = 1; 
+  let animationSpeedMultiplier = 1;
   let musicPlaying = true;
+  const maxCats = 100;
 
   function randomRange(min, max) {
     return Math.random() * (max - min) + min;
@@ -202,8 +203,6 @@
       this.angle = randomRange(0, 2 * Math.PI);
       this.baseSpeed = randomRange(30, 80);
       this.speed = this.baseSpeed * animationSpeedMultiplier;
-      this.amplitude = randomRange(10, 30);
-      this.frequency = randomRange(0.002, 0.006);
       this.phase = randomRange(0, Math.PI * 2);
       this.startTime = performance.now();
       this.vx = Math.cos(this.angle) * this.speed;
@@ -213,10 +212,12 @@
     update(time) {
       if (!animationRunning) return;
       const deltaTime = 16.67;
+
       this.speed = this.baseSpeed * animationSpeedMultiplier;
       const angle = Math.atan2(this.vy, this.vx);
       this.vx = Math.cos(angle) * this.speed;
       this.vy = Math.sin(angle) * this.speed;
+
       this.x += this.vx * (deltaTime / 1000);
       this.y += this.vy * (deltaTime / 1000);
 
@@ -237,7 +238,9 @@
 
       const elapsed = (time - this.startTime) / 1000;
       const floatY = 3 * Math.sin(elapsed * 10 + this.phase);
+
       this.elem.style.transform = `translate(${this.x}px, ${this.y + floatY}px)`;
+
       this.sparkles.forEach((sparkle, i) => {
         const offset = i * 15 + 10;
         const sparkleX = this.x - offset;
@@ -253,8 +256,10 @@
   }
 
   function addCat() {
-    const cat = new NyanCat();
-    nyanCats.push(cat);
+    if (nyanCats.length < maxCats) {
+      const cat = new NyanCat();
+      nyanCats.push(cat);
+    }
   }
 
   function createInitialCats(num) {
@@ -303,7 +308,6 @@
     }
   }
 
-  // Annihilate cats and show image
   function annihilate() {
     animationRunning = false;
     cancelAnimationFrame(animationId);
@@ -317,15 +321,13 @@
     window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   }
 
-  function handleBodyClick(e) {
-    if (e.target.closest('#controls')) {
-      return;
-    }
-    animationSpeedMultiplier += 0.2;
-    if (animationSpeedMultiplier > 3) animationSpeedMultiplier = 3;
-    speedSlider.value = animationSpeedMultiplier.toFixed(1);
-    speedValue.textContent = animationSpeedMultiplier.toFixed(1) + 'x';
-    speedSlider.setAttribute('aria-valuenow', animationSpeedMultiplier.toFixed(1));
+  function goPrevious() {
+    window.location.href = 'index.html';
+  }
+
+  function handleContainerClick(e) {
+    if (e.target.closest('#controls')) return;
+    addCat();
   }
 
   function handleSpeedSliderChange(e) {
@@ -334,24 +336,16 @@
     speedSlider.setAttribute('aria-valuenow', animationSpeedMultiplier.toFixed(1));
   }
 
-  function handleContainerClick(e) {
-    if (e.target.closest('#controls')) return;
-    addCat();
-  }
-
-
   document.getElementById('togglePlayBtn').addEventListener('click', togglePlay);
   document.getElementById('annihilateBtn').addEventListener('click', annihilate);
   document.getElementById('getRRedBtn').addEventListener('click', getRRed);
   toggleMusicBtn.addEventListener('click', toggleMusic);
+  previousBtn.addEventListener('click', goPrevious);
   speedSlider.addEventListener('input', handleSpeedSliderChange);
   container.addEventListener('click', handleContainerClick);
-  document.body.addEventListener('click', handleBodyClick);
 
-  // Create initial cats and start animation
   createInitialCats(10);
   animate();
 </script>
 </body>
 </html>
-
