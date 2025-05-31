@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CATSSSSS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff3cac, #784ba0, #2b86c5);
+    font-family: 'Comic Neue', cursive, sans-serif;
+  }
+
+  #container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .nyan-cat {
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    user-select: none;
+    pointer-events: none;
+    animation-timing-function: linear;
+  }
+
+  /* Sparkle trail behind nyan cats */
+  .sparkle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at center, #fff, transparent);
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0.7;
+    animation: sparkle-fade 1s infinite;
+  }
+
+  @keyframes sparkle-fade {
+    0% {opacity: 0.7; transform: scale(1);}
+    50% {opacity: 0.3; transform: scale(0.8);}
+    100% {opacity: 0.7; transform: scale(1);}
+  }
+</style>
+</head>
+<body>
+<div id="container"></div>
+
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/22/audio_0421630233.mp3?filename=nyan-cat-12888.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  // Nyan cat image URL (transparent background)
+  const nyanCatSrc = "https://i.imgur.com/j3GqGpI.png";
+
+  const container = document.getElementById('container');
+  const numCats = 10;
+  const nyanCats = [];
+
+  function randomRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  class NyanCat {
+    constructor() {
+      this.elem = document.createElement('img');
+      this.elem.src = nyanCatSrc;
+      this.elem.className = 'nyan-cat';
+      this.containerW = container.clientWidth;
+      this.containerH = container.clientHeight;
+      this.reset();
+      container.appendChild(this.elem);
+      this.sparkles = [];
+      this.createSparkles();
+    }
+
+    createSparkles() {
+      for (let i = 0; i < 3; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        this.sparkles.push(sparkle);
+        container.appendChild(sparkle);
+      }
+    }
+
+    reset() {
+      this.x = randomRange(-200, -100);
+      this.y = randomRange(0, container.clientHeight - 80);
+      this.speed = randomRange(30, 80); // pixels per second
+      this.amplitude = randomRange(10, 30);
+      this.frequency = randomRange(0.002, 0.006);
+      this.phase = randomRange(0, Math.PI * 2);
+      this.startTime = performance.now();
+    }
+
+    update(time) {
+      const elapsed = (time - this.startTime) / 1000;
+      this.x += this.speed * (1/60); // 60fps approx
+
+      if (this.x > this.containerW + 100) {
+        this.reset();
+      }
+
+      // vertical oscillation - floating effect
+      this.y += Math.sin(elapsed * 10 + this.phase) * 0.2;
+      this.elem.style.transform = `translate(${this.x}px, ${this.y}px)`;
+
+      // Update sparkles behind cat
+      this.sparkles.forEach((sparkle, i) => {
+        const offset = i * 15 + 10;
+        const sparkleX = this.x - offset;
+        const sparkleY = this.y + 30 + (i % 2) * 5 * Math.sin(elapsed * 15 + i * 2);
+        sparkle.style.transform = `translate(${sparkleX}px, ${sparkleY}px)`;
+      });
+    }
+  }
+
+  for (let i = 0; i < numCats; i++) {
+    nyanCats.push(new NyanCat());
+  }
+
+  function animate(time = 0) {
+    nyanCats.forEach(cat => cat.update(time));
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+</body>
+</html>
+
