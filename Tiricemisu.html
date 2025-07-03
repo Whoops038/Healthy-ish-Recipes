@@ -177,12 +177,22 @@ text-decoration: underline;
         <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
         <div class="dropdown-content" id="recipe">
             <h3>Ingredients:</h3>
-            <ul>
-                <li><input type="checkbox" id="garlic"> <label for="ricecakes">3 rice cakes (20g)</label></li>
-                <li><input type="checkbox" id="onions"> <label for="yogurt">3/4 cup plain yogurt non-fat (100g)</label></li>
-                <li><input type="checkbox" id="tomato"> <label for="caffeine">coffee</label></li>
-                <li><input type="checkbox" id="tofu"> <label for="honey">3/4 tsp honey></label></li>
-                <li><input type="checkbox" id="soyMilk"> <label for="cocoa">1/2 tbsp cocoa powder.</label></li>
+            <div class="measurement-toggle">
+                <button id="metric-btn" class="active-unit" onclick="toggleMeasurement('metric')">Metric</button>
+                <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
+            </div>
+            <ul id="ingredients-list">
+                <li class="metric"><input type="checkbox" id="banana"> <label for="ricecakes">3 rice cakes (20g)</label></li>
+                <li class="metric"><input type="checkbox" id="onions"> <label for="yogurt">3/4 cup plain yogurt non-fat (100g)</label></li>
+                <li class="metric"><input type="checkbox" id="tomato"> <label for="caffeine">bowl of coffee <i> to soak rice cakes</i></label></li>
+                <li class="metric"><input type="checkbox" id="tofu"> <label for="honey">3/4 tsp honey (5.3g)</label></li>
+                <li class="metric"><input type="checkbox" id="soyMilk"> <label for="cocoa">1/2 tbsp cocoa powder (3.8g)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us"> rice cakes (0.71oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="egg-us"> <label for="egg-us">3/4 cup plain yogurt non-fat (100g)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="bgsoda-us"> <label for="bgsoda-us">bowl of coffee</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">3/4 tsp honey (0.19 oz) <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
+                <li class="us" style="display:none;">1/2 tbsp cocoa powder (0.25 oz)</li>
+            </ul>  
             <h3>Instructions:</h3>
             <ol>
                 <li>Make coffee or tea.</li>
