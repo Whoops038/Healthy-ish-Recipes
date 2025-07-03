@@ -1,306 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Recipe Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
-    #nyanButton {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #ff704d;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-    }
-    #nyanButton:hover {
-      background-color: #cc512d;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #fffaf0;
-      color: #4a4a4a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-      min-height: 100vh;
-    }
-
-    header {
-      margin-bottom: 1.5rem;
-      text-align: center;
-      width: 100%;
-      max-width: 700px;
-    }
-
-    header h1 {
-      font-family: 'Comforter Brush', cursive;
-      font-weight: 700;
-      font-size: 2.8rem;
-      color: #ff704d;
-      margin: 0;
-      text-transform: lowercase;
-      letter-spacing: 3px;
-    }
-
-    header p {
-      font-weight: 400;
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0.5rem auto 2rem;
-      color: #666666;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    .search-container {
-      width: 100%;
-      max-width: 700px;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    #search {
-      width: 100%;
-      max-width: 400px;
-      padding: 0.5rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    nav.alphabet-nav {
-      width: 100%;
-      max-width: 700px;
-      text-align: center;
-      margin-bottom: 2rem;
-      user-select: none;
-    }
-
-    nav.alphabet-nav a {
-      margin: 0 6px;
-      text-decoration: none;
-      color: #ff704d;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    nav.alphabet-nav a:hover,
-    nav.alphabet-nav a:focus {
-      color: #fffaf0;
-      background-color: #cc512d;
-      outline: none;
-    }
-
-    .recipes {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .recipe {
-      margin-bottom: 1.5rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1rem;
-      padding: 0 10px;
-    }
-
-    .recipe-image {
-      flex-shrink: 0;
-      width: auto;
-      height: 100%;
-      max-height: 100px; 
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
-    .recipe-text {
-      text-align: left;
-      flex-grow: 1;
-    }
-
-    .recipe-text p {
-      margin: 0.2rem 0;
-    }
-
-    .recipe-text a {
-      color: #ff704d;
-      font-weight: 600;
-      font-size: 1.1rem;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 2px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: color 0.3s ease, border-color 0.3s ease;
-    }
-
-    .recipe-text a:hover,
-    .recipe-text a:focus {
-      color: #cc512d;
-      border-color: #cc512d;
-      outline: none;
-    }
-
-   .back-to-top {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ff704d;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.back-to-top:hover,
-.back-to-top:focus {
-  background-color: #cc512d;
-  outline: none;
-}
-
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      nav.alphabet-nav a {
-        font-size: 0.9rem;
-        margin: 0 4px;
-        padding: 2px 5px;
-      }
-      .recipe-text a {
-        font-size: 1rem;
-      }
-      .back-to-top {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-      }
-      .recipe {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .recipe-image {
-        max-height: 150px;
-        width: 100%;
-        margin-bottom: 0.5rem;
-      }
-      .recipe-text {
-        text-align: center;
-        width: 100%;
-      }
-    }
-
-  </style>
-</head>
-<body id="top">
-  <header>
-    <h1>Healthy-ish Recipes</h1>
-    <p>Food but healthier</p>
-  </header>
-  
-  <div class="search-container">
-    <input type="text" id="search" placeholder="Search for recipes..." aria-label="Search recipes" />
-  </div>
-
-  <nav class="alphabet-nav" aria-label="Recipe alphabetical navigation">
-    <a href="#A">A</a>
-    <a href="#B">B</a>
-    <a href="#C">C</a>
-    <a href="#D">D</a>
-    <a href="#E">E</a>
-    <a href="#F">F</a>
-    <a href="#G">G</a>
-    <a href="#H">H</a>
-    <a href="#I">I</a>
-    <a href="#J">J</a>
-    <a href="#K">K</a>
-    <a href="#L">L</a>
-    <a href="#M">M</a>
-    <a href="#N">N</a>
-    <a href="#O">O</a>
-    <a href="#P">P</a>
-    <a href="#Q">Q</a>
-    <a href="#R">R</a>
-    <a href="#S">S</a>
-    <a href="#T">T</a>
-    <a href="#U">U</a>
-    <a href="#V">V</a>
-    <a href="#W">W</a>
-    <a href="#X">X</a>
-    <a href="#Y">Y</a>
-    <a href="#Z">Z</a>
-  </nav>
-
-  <div class="recipes">
-    <div class="recipe" id="M">
-      <img src="MBnBlondie.png" class="recipe-image" />
-      <div class="recipe-text">
-        <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
-        <p>A quick and easy dessert made in the microwave with ripe bananas.</p>
-      </div>
-    </div>
-    <div class="recipe" id="R">
-      <img src="Tiricemisu.png" class="recipe-image" />
-      <div class="recipe-text">
-        <p><a href="Tiricemisu.html">Rice Cake &amp; Yogurt "Tiramisu"</a></p>
-        <p>A healthy twist on the classic tiramisu using rice cakes and yogurt.</p>
-      </div>
-    </div>
-    <div class="recipe" id="V">
-      <img src="VScrEgg.png" alt="Vegan Scrambled Egg" class="recipe-image" />
-      <div class="recipe-text">
-        <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
-        <p>A delicious vegan alternative to scrambled eggs made with tofu.</p>
-      </div>
-    </div>
-  </div>
-
-  <a href="#top" class="back-to-top" aria-label="Back to top">Back to Top</a>
-  <button id="nyanButton" aria-label="Go to Nyan Cats page" onclick="location.href='CATS.html'">CATS!!!</button>
-
-  <script>
-    document.getElementById('search').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const recipes = document.querySelectorAll('.recipe');
-
-      recipes.forEach(recipe => {
-        const title = recipe.querySelector('a').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
-          recipe.style.display = 'flex';
-        } else {
-          recipe.style.display = 'none';
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Microwave Banana Blondie</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fffaf0;
+            color: #4a4a4a;
+            padding: 2rem;
         }
-      });
-    });
-  </script>
+        h1 {
+            color: #ff704d;
+        }
+        .dropdown {
+            margin: 1rem 0;
+            border: 1px solid #ff704d;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .dropdown-header {
+            background-color: #ff704d;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .dropdown-content {
+            display: none;
+            padding: 1rem;
+            background-color: #ffe6d1;
+        }
+        .dropdown-content p {
+            margin: 0.5rem 0;
+        }
+        .dropdown-content ul {
+            padding-left: 20px;
+        }
+        #comments-list {
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid #ff9a7b;
+            padding-top: 1rem;
+        }
+        .comment {
+            background: #fff4e6;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .comment p {
+            margin: 0 0 0.5rem 0;
+            white-space: pre-wrap;
+        }
+        .comment img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .comment button.delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ff5c33;
+            border: none;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+        .comment button.delete-btn:hover {
+            background: #e04a29;
+        }
+        form#comment-form {
+            display: flex;
+            flex-direction: column;
+        }
+        form#comment-form textarea {
+            resize: vertical;
+            min-height: 80px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ff704d;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        form#comment-form input[type="file"] {
+            margin-bottom: 0.5rem;
+        }
+        form#comment-form button {
+            align-self: flex-start;
+            background-color: #ff704d;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        form#comment-form button:hover {
+            background-color: #e6603f;
+        }
+        #pl-link-container {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        #pl-link-container a {
+            color: #ff704d;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #ff704d;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #pl-link-container a:hover {
+            background-color: #ff704d;
+            color: white;
+        }
+        .fixed-bottom-text {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 6px 0;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+            z-index: 9999;
+            margin: 0;
+        }
+        .fixed-bottom-text a {
+            color: #555;
+            text-decoration: none;
+        }
+        .fixed-bottom-text a:hover,
+        .fixed-bottom-text a:focus {
+            text-decoration: underline;
+        }
+        .measurement-toggle {
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Banana Blondie</h1>
+    &nbsp;
+    &nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('time')">Time</div>
+        <div class="dropdown-content" id="time">
+            <p>Total time: 4.5 - 5.5 min</p>
+            <p>Prep time: 2 min</p>
+            <p>Microwave time: 1 min</p>
+            <p>Cool time: 0.5 - 1.5 min</p>
+            <p>Clean + pack-away time: 1 min</p>
+        </div>
+    </div>
+    &nbsp;
+    &nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
+        <div class="dropdown-content" id="recipe">
+            <h3>Ingredients:</h3>
+            <div class="measurement-toggle">
+                <button onclick="toggleMeasurement('metric')">Metric</button>
+                <button onclick="toggleMeasurement('us')">US</button>
+            </div>
+            <ul id="ingredients-list">
+                <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1 banana (90g)</label></li>
+                <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1 large egg (50g)</label></li>
+                <li class="metric"><input type="checkbox" id="bgsoda"> <label for="bgsoda">1/16th tsp (0.2g) baking soda</label></li>
+                <li class="metric"><input type="checkbox" id="citrus"> <label for="citrus">1/6th tsp (0.8g) lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
+                <li class="metric"><i>optionally 1 tbsp oats (10.3g)</i></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">1 banana (3.2 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="egg-us"> <label for="egg-us">1 large egg (1.76 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="bgsoda-us"> <label for="bgsoda-us">1/16th tsp baking soda</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">1/6th tsp lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
+                <li class="us" style="display:none;"><i>optionally 1 tbsp oats (0.36 oz)</i></li>
+            </ul>
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Mash banana with fork until it is quite smooth.</li>
+                <li>Add everything else and stir until pretty smooth.</li>
+                <li>Microwave on high (1000W) for 1.5 - 2 minutes.</li>
+            </ol>
+            <h3>Changing recipe suggestions:</h3>
+            <ul>
+                <p>Flour instead of oats. Same volume flour as you would oats. E.g. use 1 tbsp (7g) AP flour per 1 tbsp (6g) oats.</p>
+                <p>Lower cholesterol egg options and other substitutes are available.</p>
+                <li>1 tsp of citrus (e.g. lemon/lime)</li>
+                <li>1/2 tbsp of honey</li>
+                <li>1/2 tsp vanilla</li>
+            </ul>
+        </div>
+    </div>
+    &nbsp;
+    &nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('nutrition')">Nutrition</div>
+        <div class="dropdown-content" id="nutrition">
+            <h3>NUTRITION PER SERVE (300g)</h3>
+            <p><b>MyNetDiary Grade: B+</b></p>
+            <p>(10%) = 10% of daily value based on 2000kcal/8368kJ diet</p>
+            <i>Generally, 5% or less dv is considered low, while 20+% is considered high)</i>
+            <p>Calories: 207 kcal/ 866 kJ (10.35%)</p>
+            <p>Fat: 7.1g (9%)</p>
+            <p>Saturated: 1.2g (6%)</p>
+            <p>Unsaturated: 4.7g (8%)</p>
+            <p>Monounsaturated: 1.9g</p>
+            <p>Polyunsaturated: 2.8g</p>
+            <p>Carbs: 19.5g (7%)</p>
+            <p>Fiber: 8g (29%)</p>
+            <p>Sugars: 5.3g</p>
+            <p>free sugars: NONE</p>
+            <p>Protein: 20.7g (41%)</p>
+            <p>Cholesterol: NONE</p>
+            <p>Sodium [salt equivalent]: 58mg [0.145g] (3%)</p>
+            <p>Calcium: 152mg (12%)</p>
+            <p>Potassium: 306mg (7%)</p>
+            <p>Magnesium: 17mg (4%)</p>
+            <p>Iron: 1.5mg (8%)</p>
+            <p>Zinc: 0.3mg (3%)</p>
+        </div>
+    </div>
+    &nbsp;
+    &nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('comments')">Comments</div>
+        <div class="dropdown-content" id="comments">
+            <form id="comment-form">
+                <label for="comment-text">Write your comment:</label>
+                <textarea id="comment-text" placeholder="Hmm..." required></textarea>
+                <label for="comment-photo">Do you wanna share a photo? You don't have to share a photo</label>
+                <input type="file" id="comment-photo" accept="image/*" />
+                <button type="submit">Post Comment</button>
+            </form>
+            <div id="comments-list"></div>
+        </div>
+    </div>
+
+    <p><a href="index.html">Country roads, take me hooome (home page)</a></p>
+    &nbsp;
+    &nbsp;
+
+    <script>
+        function toggleDropdown(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        const commentForm = document.getElementById('comment-form');
+        const commentsList = document.getElementById('comments-list');
+        const commentText = document.getElementById('comment-text');
+        const commentPhoto = document.getElementById('comment-photo');
+
+        let comments = [];
+        const storageKey = 'bananaBlondieComments';
+
+        function loadComments() {
+            const data = localStorage.getItem(storageKey);
+            if (data) {
+                comments = JSON.parse(data);
+            } else {
+                comments = [];
+            }
+            renderComments();
+        }
+
+        function renderComments() {
+            commentsList.innerHTML = '';
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
+                return;
+            }
+            comments.forEach((comment, index) => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+
+                const textP = document.createElement('p');
+                textP.textContent = comment.text;
+                commentDiv.appendChild(textP);
+
+                if (comment.photoDataUrl) {
+                    const img = document.createElement('img');
+                    img.src = comment.photoDataUrl;
+                    img.alt = 'User  uploaded photo';
+                    commentDiv.appendChild(img);
+                }
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.title = 'Delete this comment';
+                deleteBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to delete this comment?')) {
+                        deleteComment(index);
+                    }
+                });
+                commentDiv.appendChild(deleteBtn);
+
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        commentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const textValue = commentText.value.trim();
+            if (textValue === '') {
+                alert('Please enter a comment.');
+                return;
+            }
+
+            if (commentPhoto.files.length > 0) {
+                const file = commentPhoto.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newComment = {
+                        text: textValue,
+                        photoDataUrl: e.target.result
+                    };
+                    comments.push(newComment);
+                    saveComments();
+                    renderComments();
+                    commentForm.reset();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const newComment = {
+                    text: textValue,
+                    photoDataUrl: null
+                };
+                comments.push(newComment);
+                saveComments();
+                renderComments();
+                commentForm.reset();
+            }
+        });
+
+        function saveComments() {
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+        }
+
+        function deleteComment(index) {
+            comments.splice(index, 1);
+            saveComments();
+            renderComments();
+        }
+
+        function toggleMeasurement(unit) {
+            const metricItems = document.querySelectorAll('.metric');
+            const usItems = document.querySelectorAll('.us');
+
+            if (unit === 'metric') {
+                metricItems.forEach(item => item.style.display = 'list-item');
+                usItems.forEach(item => item.style.display = 'none');
+            } else {
+                metricItems.forEach(item => item.style.display = 'none');
+                usItems.forEach(item => item.style.display = 'list-item');
+            }
+        }
+
+        loadComments();
+    </script>
+    <div id="pd-link-container">
+        <p class="fixed-bottom-text"><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
+    </div>
 </body>
 </html>
