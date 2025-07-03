@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tofegg</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fffaf0;
+            color: #4a4a4a;
+            padding: 2rem;
+        }
+        h1 {
+            color: #ff704d;
+        }
+        .dropdown {
+            margin: 1rem 0;
+            border: 1px solid #ff704d;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .dropdown-header {
+            background-color: #ff704d;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .dropdown-content {
+            display: none;
+            padding: 1rem;
+            background-color: #ffe6d1;
+        }
+        .dropdown-content p {
+            margin: 0.5rem 0;
+        }
+        .dropdown-content ul {
+            padding-left: 20px;
+        }
+        #comments-list {
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid #ff9a7b;
+            padding-top: 1rem;
+        }
+        .comment {
+            background: #fff4e6;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .comment p {
+            margin: 0 0 0.5rem 0;
+            white-space: pre-wrap;
+        }
+        .comment img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .comment button.delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ff5c33;
+            border: none;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+        .comment button.delete-btn:hover {
+            background: #e04a29;
+        }
+        form#comment-form {
+            display: flex;
+            flex-direction: column;
+        }
+        form#comment-form textarea {
+            resize: vertical;
+            min-height: 80px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ff704d;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        form#comment-form input[type="file"] {
+            margin-bottom: 0.5rem;
+        }
+        form#comment-form button {
+            align-self: flex-start;
+            background-color: #ff704d;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        form#comment-form button:hover {
+            background-color: #e6603f;
+        }
+
+   #pl-link-container {
+margin-top: 4rem;
+text-align: center;
+font-size: 2rem;
+}
+#pl-link-container a {
+color: #ff704d;
+text-decoration: none;
+font-weight: 600;
+border: 2px solid #ff704d;
+padding: 0.3rem 0.8rem;
+border-radius: 5px;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+#pl-link-container a:hover {
+background-color: #ff704d;
+color: white;
+}
+    .fixed-bottom-text {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+font-size: 1rem;
+text-align: center;
+padding: 6px 0;
+background: rgba(255, 255, 255, 0.8);
+box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+z-index: 9999;
+margin: 0;
+}
+.fixed-bottom-text a {
+color: #555;
+text-decoration: none;
+}
+.fixed-bottom-text a:hover,
+.fixed-bottom-text a:focus {
+text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Tofegg</h1>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('time')">Time</div>
+        <div class="dropdown-content" id="time">
+            <p>Total time: 5.5-7.5 min</p>
+            <p>Prep time: 2.5 min (mashing till consistent will take a while)</p>
+            <p>Microwave + sauce-making time: 2 min</p>
+            <p>Clean + pack-away time: 1-1.5 min</p>
+        </div>
+    </div>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
+        <div class="dropdown-content" id="recipe">
+            <h3>Ingredients:</h3>
+            <div class="measurement-toggle">
+                <button id="metric-btn" class="active-unit" onclick="toggleMeasurement('metric')">Metric</button>
+                <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
+            </div>
+            <ul id="ingredients-list">
+                <li class="metric"><input type="text" id="dish"> <label for="dish"><i><b>Dish</b></i></label></li>
+                <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1 medium egg (45g)</label></li>
+                <li class="metric"><input type="checkbox" id="tofu"> <label for="tofu">150g (1/2 cup) silken tofu</label></li>
+                <li class="metric"><input type="text" id="sauce"> <label for="sauce"><i><b>Sauce</b></i></label></li>
+                <li class="metric"><input type="checkbox" id="vinegar"> <label for="vinegar">1 tsp white/distilled vinegar</label></li>
+                <li class="metric"><input type="checkbox" id="water"> <label for="water">1 tsp water</label></li>
+                <li class="metric"><input type="checkbox" id="soy"> <label for="soy">1/4 tsp soy suace (5.3g)</label></li>
+                <li class="metric"><input type="checkbox" id="cornstarch"> <label for="cornstarch">1 tsp cornstarch (3.8g)</label></li>
+                
+              ` <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us"> rice cakes (0.71oz)</label></li>
+                <li class="us" style="display:none;"><input type="text" id="dish-u"> <label for="dish-u"><i><b>Dish</b></i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="egg-u"> <label for="egg-u">1 medium egg (45g)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="tofu-u"> <label for="tofu-u">150g (1/2 cup) silken tofu</label></li>
+                <li class="us" style="display:none;"><input type="text" id="sauce-u"> <label for="sauce-u"><i><b>Sauce</b></i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="vinegar-u"> <label for="vinegar-u">1 tsp white/distilled vinegar</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="water-u"> <label for="water-u">1 tsp water</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="soy-u"> <label for="soy-u">1/4 tsp soy suace (5.3g)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="conrstarch-u"> <label for="cornstarch-u">1 tsp cornstarch (3.8g)</label></li>
+            </ul>  
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Mash 150g (1/2 cup) silken tofu</li>
+                <li>Add an egg and mix till even distribution</li>
+                <li>Cover with microwave-safe lid/covering and microwave for 2 minutes</li>
+                <li>While it is microwaving, make a sauce from tsp rice wine vinegar, tsp water, tsp cornstarch and 1/4 tsp soy sauce</li>
+                <li></li>After microwaving, loosen "tofegg", then flip over on plate and add sauce</li>
+                <li>Top with cocoa powder or cinnamon</li>   
+            </ol>
+            <h3>Changing recipe suggestions:</h3>
+            <ul>
+              <li>for sauce, pretty much increase or decrease whatever to taste. Note that a significant change in the concentration of cornstarch will be needed to change the thickness of the sauce.</li>
+              <li>Add sesame oil to the sauce</li>
+              <li>Use the same volume of liquid instead of tofu. Note that liquid fat (e.g. melted butter, oil) won't work</li>
+                <li>Garnish tofegg with spring onion and/or garlic and/or</li>
+            </ul>
+        </div>
+    </div>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('nutrition')">Nutrition</div>
+        <div class="dropdown-content" id="nutrition">
+            <h3>NUTRITION PER SERVE (213g)</h3>
+          <p><i>Makes 1 serve</i></p>
+            <p><b>MyNetDiary Grade: +-</b>
+            <p>(10%) = 10% of daily value based on 2000kcal/8368kJ diet</p>
+            <i>Generally, 5% or less dv is considered low, while 20+% is considered high)</i></p>
+            <p><i></i></p>
+            <p>Calories: 152kcal/635.968kJ (7.6%)</p>
+            <p>Fat: 8.1g (10%)</p>
+            <ul>
+            <p>Saturated: 2.2g (11%)</p>
+            <p>Unsaturated: 2.7g (3.5 - 6%)</p>
+            <p>⠀- Monounsaturated: 1.8g</p>
+            <p> - polyunsaturated: 0.9g</p>
+            <p>⠀- Trans: NONE</p>
+            </ul>
+            <p>Carbs: 5.7g (2%)</p>
+            <ul>
+            <p>Fiber: 0.5g (1.8%)</p>
+            <p>Sugars: 13g</p>
+            <p>⠀- Free sugars: 0</p2>
+            </ul>
+            <p>Protein: 13g (26%)</p>
+            <p>Cholesterol: 167mg (56%)</p>
+            <p>Sodium [salt equivalent]: 138mg [0.345g] (7%)</p>
+            <p>Calcium: 118mg (9%)</p>
+            <p>Potassium: 69mg (1%)</p>
+            <p>Magnesium: 7mg (2%)</p>
+            <p>Iron: 0.8mg (4%)</p>
+            <p>Zinc: 0.4mg (4%)</p>
+          <h4>Nutrients this dish is high in</h4>
+          <p>Biotin: 9.9mg (33%)</p>
+          <p>Selenium: 14mcg (25%)</p>
+        </div>
+    </div>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('comments')">Comments</div>
+        <div class="dropdown-content" id="comments">
+            <form id="comment-form">
+                <label for="comment-text">Write your comment:</label>
+                <textarea id="comment-text" placeholder="Hmm..." required></textarea>
+                <label for="comment-photo">Do you wanna share a photo? You don't have to share a photo.</label>
+                <input type="file" id="comment-photo" accept="image/*" />
+                <button type="submit">Post Comment</button>
+            </form>
+            <div id="comments-list"></div>
+        </div>
+    </div>
+
+    <p><a href="index.html">Country roads, take me hooooooooome (home page)</a></p>
+&nbsp;
+&nbsp;
+
+    <script>
+        function toggleDropdown(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        const commentForm = document.getElementById('comment-form');
+        const commentsList = document.getElementById('comments-list');
+        const commentText = document.getElementById('comment-text');
+        const commentPhoto = document.getElementById('comment-photo');
+
+        let comments = [];
+        const storageKey = 'bananaBlondieComments';
+
+        function loadComments() {
+            const data = localStorage.getItem(storageKey);
+            if (data) {
+                comments = JSON.parse(data);
+            } else {
+                comments = [];
+            }
+            renderComments();
+        }
+
+        function renderComments() {
+            commentsList.innerHTML = '';
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p>Be 1st commenter! Or not; your choice. </p>';
+                return;
+            }
+            comments.forEach((comment, index) => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+
+                const textP = document.createElement('p');
+                textP.textContent = comment.text;
+                commentDiv.appendChild(textP);
+
+                if (comment.photoDataUrl) {
+                    const img = document.createElement('img');
+                    img.src = comment.photoDataUrl;
+                    img.alt = 'User uploaded photo';
+                    commentDiv.appendChild(img);
+                }
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.title = 'Delete this comment';
+                deleteBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to delete this comment?')) {
+                        deleteComment(index);
+                    }
+                });
+                commentDiv.appendChild(deleteBtn);
+
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        commentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const textValue = commentText.value.trim();
+            if (textValue === '') {
+                alert('Please enter a comment.');
+                return;
+            }
+
+            if (commentPhoto.files.length > 0) {
+                const file = commentPhoto.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newComment = {
+                        text: textValue,
+                        photoDataUrl: e.target.result
+                    };
+                    comments.push(newComment);
+                    saveComments();
+                    renderComments();
+                    commentForm.reset();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const newComment = {
+                    text: textValue,
+                    photoDataUrl: null
+                };
+                comments.push(newComment);
+                saveComments();
+                renderComments();
+                commentForm.reset();
+            }
+        });
+
+        function saveComments() {
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+        }
+
+        function deleteComment(index) {
+            comments.splice(index, 1);
+            saveComments();
+            renderComments();
+        }
+          function toggleMeasurement(unit) {
+            const metricItems = document.querySelectorAll('.metric');
+            const usItems = document.querySelectorAll('.us');
+            const metricBtn = document.getElementById('metric-btn');
+            const usBtn = document.getElementById('us-btn');
+
+            if (unit === 'metric') {
+                metricItems.forEach(item => item.style.display = 'list-item');
+                usItems.forEach(item => item.style.display = 'none');
+                metricBtn.classList.add('active-unit');
+                usBtn.classList.remove('active-unit');
+            } else {
+                metricItems.forEach(item => item.style.display = 'none');
+                usItems.forEach(item => item.style.display = 'list-item');
+                metricBtn.classList.remove('active-unit');
+                usBtn.classList.add('active-unit');
+            }
+        }
+        loadComments();
+    </script>
+    <div id="pd-link-container">
+        <p class="fixed-bottom-text"><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
+    </div>
+</body>
+</html>
