@@ -155,6 +155,11 @@
         .measurement-toggle {
             margin: 1rem 0;
         }
+        .measurement-toggle button.active-unit {
+            background-color: #ff704d;
+            color: white;
+            border-color: #ff704d;
+        }
     </style>
 </head>
 <body>
@@ -181,21 +186,21 @@
             <h3>Ingredients:</h3>
             <!-- start measurement toggle -->
             <div class="measurement-toggle">
-                <button onclick="toggleMeasurement('metric')">Metric</button>
-                <button onclick="toggleMeasurement('us')">US</button>
+                <button id="metric-btn" class="active-unit" onclick="toggleMeasurement('metric')">Metric</button>
+                <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
             </div>
             <!-- end measurement toggle -->
             <!-- start ingredients list -->
             <ul id="ingredients-list">
-                <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1 banana (90g)</label></li>
+                <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1 small  banana (90g)</label></li>
                 <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1 large egg (50g)</label></li>
-                <li class="metric"><input type="checkbox" id="bgsoda"> <label for="bgsoda">1/16th tsp (0.2g) baking soda</label></li>
+                <li class="metric"><input type="checkbox" id="bgsoda"> <label for="bgsoda">1.5 pinch (0.2g) baking soda</label></li>
                 <li class="metric"><input type="checkbox" id="citrus"> <label for="citrus">1/6th tsp (0.8g) lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
                 <li class="metric"><i>optionally 1 tbsp oats (10.3g)</i></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">1 banana (3.2 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">1 small banana (3.2 oz)</label></li>
                 <li class="us" style="display:none;"><input type="checkbox" id="egg-us"> <label for="egg-us">1 large egg (1.76 oz)</label></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="bgsoda-us"> <label for="bgsoda-us">1/16th tsp baking soda</label></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">1/6th tsp lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="bgsoda-us"> <label for="bgsoda-us">1.5 pinch tsp baking soda</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">1/5th tsp lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
                 <li class="us" style="display:none;"><i>optionally 1 tbsp oats (0.36 oz)</i></li>
             </ul>
             <!-- end ingredients list -->
@@ -380,13 +385,19 @@
         function toggleMeasurement(unit) {
             const metricItems = document.querySelectorAll('.metric');
             const usItems = document.querySelectorAll('.us');
+            const metricBtn = document.getElementById('metric-btn');
+            const usBtn = document.getElementById('us-btn');
 
             if (unit === 'metric') {
                 metricItems.forEach(item => item.style.display = 'list-item');
                 usItems.forEach(item => item.style.display = 'none');
+                metricBtn.classList.add('active-unit');
+                usBtn.classList.remove('active-unit');
             } else {
                 metricItems.forEach(item => item.style.display = 'none');
                 usItems.forEach(item => item.style.display = 'list-item');
+                metricBtn.classList.remove('active-unit');
+                usBtn.classList.add('active-unit');
             }
         }
 
