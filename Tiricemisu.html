@@ -380,6 +380,24 @@ text-decoration: underline;
             saveComments();
             renderComments();
         }
+          function toggleMeasurement(unit) {
+            const metricItems = document.querySelectorAll('.metric');
+            const usItems = document.querySelectorAll('.us');
+            const metricBtn = document.getElementById('metric-btn');
+            const usBtn = document.getElementById('us-btn');
+
+            if (unit === 'metric') {
+                metricItems.forEach(item => item.style.display = 'list-item');
+                usItems.forEach(item => item.style.display = 'none');
+                metricBtn.classList.add('active-unit');
+                usBtn.classList.remove('active-unit');
+            } else {
+                metricItems.forEach(item => item.style.display = 'none');
+                usItems.forEach(item => item.style.display = 'list-item');
+                metricBtn.classList.remove('active-unit');
+                usBtn.classList.add('active-unit');
+            }
+        }
         loadComments();
     </script>
     <div id="pd-link-container">
