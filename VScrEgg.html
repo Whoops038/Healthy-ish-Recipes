@@ -182,15 +182,34 @@ text-decoration: underline;
         <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
         <div class="dropdown-content" id="recipe">
             <h3>Ingredients:</h3>
-            <ul>
-                <li><input type="checkbox" id="garlic"> <label for="garlic">2 cloves garlic (6g)</label></li>
-                <li><input type="checkbox" id="onions"> <label for="onions">2 small onions or 1 medium onion (50g)</label></li>
-                <li><input type="checkbox" id="tomato"> <label for="tomato">1 small tomato (75g)</label></li>
-                <li><input type="checkbox" id="tofu"> <label for="tofu">100g tofu of medium firmness. <i>Firmer tofu works too; it just isn't optimal - it is only silken or soft tofu that doesn't work.</i></label></li>
-                <li><input type="checkbox" id="soyMilk"> <label for="soyMilk">4 tbsp (59g) unsweetened soy milk. <i>All kinds of milk work; I used NutriSoy OMEGA</i></label></li>
-                <li><input type="checkbox" id="sesameOil"> <label for="sesameOil">3/4 tsp (3.4g) sesame oil. <i>or other neutral oil</i></label></li>
-                <li><input type="checkbox" id="kalaNamak"> <label for="kalaNamak">1 tsp (1.2g) kala namak aka (Indian) black salt. <i>Ensure to use this salt as it has a sulfur content similar to eggs which gives it an eggy taste</i></label></li>
-                <li><input type="checkbox" id="turmeric"> <label for="turmeric">1/4 tsp (2.5g) turmeric. <i>optional for color</i></label></li>
+             <div class="measurement-toggle">
+                <button id="metric-btn" class="active-unit" onclick="toggleMeasurement('metric')">Metric</button>
+                <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
+            </div>
+            <ul id="ingredients-list">
+                <li class="metric"><input type="checkbox" id="garlic"> <label for="garlic">2 cloves garlic (2tsp/6g)</label></li>
+                <li class="metric"><input type="checkbox" id="onions"> <label for="onions">2 small onions or 1 medium onion (50g)</label></li>
+                <li class="metric"><input type="checkbox" id="tomato"> <label for="tomato">1 small tomato (75g)</label></li>
+                <li class="metric"><input type="checkbox" id="tofu"> <label for="tofu">100g (110 ml) tofu of medium firmness. <i>Firmer tofu works too; it just isn't optimal - it is only silken or soft tofu that doesn't work.</i></label></li>
+                <li class="metric"><input type="checkbox" id="soyMilk"><label for="soyMilk">4 tbsp (59g) unsweetened soy milk. <i>All kinds of milk work; I used NutriSoy OMEGA</i></label></li>
+                <li class="metric"><input type="checkbox" id="sesameOil"> <label for="sesameOil">3/4 tsp (3.4g) sesame oil. <i>or other neutral oil</i></label></li>
+                <li class="metric"><input type="checkbox" id="kalaNamak"> <label for="kalaNamak">1 tsp (1.2g) kala namak aka (Indian) black salt. <i>Ensure to use this specific black salt as it has a sulfur content similar to eggs which gives it an eggy taste</i></label></li>
+                <li class="metric"><input type="checkbox" id="turmeric"> <label for="turmeric"><i> optionally add </i>1/4 tsp (2.5g) turmeric for color</i></label></li>
+                
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">2 cloves garlic (2tsp/0.21oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="onions"> <label for="onions">2 small onions or 1 medium onion (1.76 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="tomato"> <label for="tomato">1 small tomato (2.65oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="tofu"> <label for="tofu">100g (3.38 fl oz) tofu of medium firmness. <i>Firmer tofu works too; it just isn't optimal - it is only silken or soft tofu that doesn't work.</i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="soyMilk"><label for="soyMilk">4 tbsp (2.08 oz) unsweetened soy milk. <i>All kinds of milk work; I used NutriSoy OMEGA</i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="sesameOil"> <label for="sesameOil">4/5 tsp (0.12 oz1.2) sesame oil. <i>or other neutral oil</i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="kalaNamak"> <label for="kalaNamak">1 tsp (0.04oz) kala namak aka (Indian/Asian) black salt. <i>Ensure to use this specific black salt as it has a sulfur content similar to eggs which gives it an eggy taste</i></label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="turmeric"> <label for="turmeric"><i> optionally add </i>1/4 tsp (0.09g) turmeric for color</i></label></li>
+            </ul>  
+                <li>
+                <li>
+                <li>
+                <li>
+                <li>
             </ul>
             <h3>Instructions:</h3>
             <ol>
