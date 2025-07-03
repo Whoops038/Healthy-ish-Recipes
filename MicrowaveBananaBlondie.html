@@ -114,53 +114,53 @@
             background-color: #e6603f;
         }
         #pl-link-container {
-margin-top: 4rem;
-text-align: center;
-font-size: 2rem;
-}
-#pl-link-container a {
-color: #ff704d;
-text-decoration: none;
-font-weight: 600;
-border: 2px solid #ff704d;
-padding: 0.3rem 0.8rem;
-border-radius: 5px;
-transition: background-color 0.3s ease, color 0.3s ease;
-}
-#pl-link-container a:hover {
-background-color: #ff704d;
-color: white;
-}
- 
- 
-
-    .fixed-bottom-text {
-position: fixed;
-bottom: 0;
-left: 0;
-width: 100%;
-font-size: 1.5rem;
-text-align: center;
-padding: 6px 0;
-background: rgba(255, 255, 255, 0.8);
-box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
-z-index: 9999;
-margin: 0;
-}
-.fixed-bottom-text a {
-color: #555;
-text-decoration: none;
-}
-.fixed-bottom-text a:hover,
-.fixed-bottom-text a:focus {
-text-decoration: underline;
-}
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        #pl-link-container a {
+            color: #ff704d;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #ff704d;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #pl-link-container a:hover {
+            background-color: #ff704d;
+            color: white;
+        }
+        .fixed-bottom-text {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 6px 0;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+            z-index: 9999;
+            margin: 0;
+        }
+        .fixed-bottom-text a {
+            color: #555;
+            text-decoration: none;
+        }
+        .fixed-bottom-text a:hover,
+        .fixed-bottom-text a:focus {
+            text-decoration: underline;
+        }
+        .measurement-toggle {
+            margin: 1rem 0;
+        }
     </style>
 </head>
 <body>
     <h1>Banana Blondie</h1>
-&nbsp;
-&nbsp;
+    &nbsp;
+    &nbsp;
 
     <div class="dropdown">
         <div class="dropdown-header" onclick="toggleDropdown('time')">Time</div>
@@ -172,47 +172,59 @@ text-decoration: underline;
             <p>Clean + pack-away time: 1 min</p>
         </div>
     </div>
-&nbsp;
-&nbsp;
+    &nbsp;
+    &nbsp;
 
     <div class="dropdown">
         <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
         <div class="dropdown-content" id="recipe">
             <h3>Ingredients:</h3>
-            <ul>
-                 <li><input type="checkbox" id="banana"> <label for="banana">1 banana (90g)</label></li>
-                <li><input type="checkbox" id="egg"> <label for="egg">1 large egg (50g)</label></li>
-                <li><input type="checkbox" id="bgsoda"> <label for="bgsoda">1/16th tsp (0.2g) baking soda</label></li>
-                <li><input type="checkbox" id="citrus"> <label for="citrus">1/6th tsp (0.8g) lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
-                <li><i>optionally 1 tbsp oats (10.3g)</i></li>
+            <!-- start measurement toggle -->
+            <div class="measurement-toggle">
+                <button onclick="toggleMeasurement('metric')">Metric</button>
+                <button onclick="toggleMeasurement('us')">US</button>
+            </div>
+            <!-- end measurement toggle -->
+            <!-- start ingredients list -->
+            <ul id="ingredients-list">
+                <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1 banana (90g)</label></li>
+                <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1 large egg (50g)</label></li>
+                <li class="metric"><input type="checkbox" id="bgsoda"> <label for="bgsoda">1/16th tsp (0.2g) baking soda</label></li>
+                <li class="metric"><input type="checkbox" id="citrus"> <label for="citrus">1/6th tsp (0.8g) lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
+                <li class="metric"><i>optionally 1 tbsp oats (10.3g)</i></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">1 banana (3.2 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="egg-us"> <label for="egg-us">1 large egg (1.76 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="bgsoda-us"> <label for="bgsoda-us">1/16th tsp baking soda</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">1/6th tsp lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
+                <li class="us" style="display:none;"><i>optionally 1 tbsp oats (0.36 oz)</i></li>
             </ul>
+            <!-- end ingredients list -->
             <h3>Instructions:</h3>
             <ol>
-               <li>Mash banana with fork until it is quite smooth.</li>
+                <li>Mash banana with fork until it is quite smooth.</li>
                 <li>Add everything else and stir until pretty smooth.</li>
                 <li>Microwave on high (1000W) for 1.5 - 2 minutes.</li>
             </ol>
             <h3>Changing recipe suggestions:</h3>
             <ul>
                 <p>Flour instead of oats. Same volume flour as you would oats. E.g. use 1 tbsp (7g) AP flour per 1 tbsp (6g) oats.</p>
-            <p>Lower cholesterol egg options and other substitutes are available.</p>
+                <p>Lower cholesterol egg options and other substitutes are available.</p>
                 <li>1 tsp of citrus (e.g. lemon/lime)</li>
                 <li>1/2 tbsp of honey</li>
                 <li>1/2 tsp vanilla</li>
             </ul>
         </div>
     </div>
-&nbsp;
-&nbsp;
+    &nbsp;
+    &nbsp;
 
     <div class="dropdown">
         <div class="dropdown-header" onclick="toggleDropdown('nutrition')">Nutrition</div>
         <div class="dropdown-content" id="nutrition">
             <h3>NUTRITION PER SERVE (300g)</h3>
-            <p><b>MyNetDiary Grade: B+</b>
+            <p><b>MyNetDiary Grade: B+</b></p>
             <p>(10%) = 10% of daily value based on 2000kcal/8368kJ diet</p>
-            <i>Generally, 5% or less dv is considered low, while 20+% is considered high)</i></p>
-            <p><i></i></p>
+            <i>Generally, 5% or less dv is considered low, while 20+% is considered high)</i>
             <p>Calories: 207 kcal/ 866 kJ (10.35%)</p>
             <p>Fat: 7.1g (9%)</p>
             <p>Saturated: 1.2g (6%)</p>
@@ -222,7 +234,7 @@ text-decoration: underline;
             <p>Carbs: 19.5g (7%)</p>
             <p>Fiber: 8g (29%)</p>
             <p>Sugars: 5.3g</p>
-            <p>free sugars: NONE</p2>
+            <p>free sugars: NONE</p>
             <p>Protein: 20.7g (41%)</p>
             <p>Cholesterol: NONE</p>
             <p>Sodium [salt equivalent]: 58mg [0.145g] (3%)</p>
@@ -233,8 +245,8 @@ text-decoration: underline;
             <p>Zinc: 0.3mg (3%)</p>
         </div>
     </div>
-&nbsp;
-&nbsp;
+    &nbsp;
+    &nbsp;
 
     <div class="dropdown">
         <div class="dropdown-header" onclick="toggleDropdown('comments')">Comments</div>
@@ -251,8 +263,8 @@ text-decoration: underline;
     </div>
 
     <p><a href="index.html">Country roads, take me hooome (home page)</a></p>
-&nbsp;
-&nbsp;
+    &nbsp;
+    &nbsp;
 
     <script>
         function toggleDropdown(id) {
@@ -263,6 +275,7 @@ text-decoration: underline;
                 content.style.display = "block";
             }
         }
+        // end measurement toggle function
 
         const commentForm = document.getElementById('comment-form');
         const commentsList = document.getElementById('comments-list');
@@ -299,7 +312,7 @@ text-decoration: underline;
                 if (comment.photoDataUrl) {
                     const img = document.createElement('img');
                     img.src = comment.photoDataUrl;
-                    img.alt = 'User uploaded photo';
+                    img.alt = 'User  uploaded photo';
                     commentDiv.appendChild(img);
                 }
 
@@ -362,10 +375,25 @@ text-decoration: underline;
             saveComments();
             renderComments();
         }
+
+        // start measurement toggle function
+        function toggleMeasurement(unit) {
+            const metricItems = document.querySelectorAll('.metric');
+            const usItems = document.querySelectorAll('.us');
+
+            if (unit === 'metric') {
+                metricItems.forEach(item => item.style.display = 'list-item');
+                usItems.forEach(item => item.style.display = 'none');
+            } else {
+                metricItems.forEach(item => item.style.display = 'none');
+                usItems.forEach(item => item.style.display = 'list-item');
+            }
+        }
+
         loadComments();
     </script>
     <div id="pd-link-container">
-            <p class="fixed-bottom-text"><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
+        <p class="fixed-bottom-text"><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
     </div>
 </body>
 </html>
