@@ -136,7 +136,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 56px; /* Set height to 56 pixels */
+        height: 56px;
         font-size: 1rem;
         text-align: center;
         padding: 6px 0;
@@ -185,13 +185,10 @@
         <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
         <div class="dropdown-content" id="recipe">
             <h3>Ingredients:</h3>
-            <!-- start measurement toggle -->
             <div class="measurement-toggle">
                 <button id="metric-btn" class="active-unit" onclick="toggleMeasurement('metric')">Metric</button>
                 <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
             </div>
-            <!-- end measurement toggle -->
-            <!-- start ingredients list -->
             <ul id="ingredients-list">
                 <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1 small  banana (90g)</label></li>
                 <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1 large egg (50g)</label></li>
@@ -204,7 +201,6 @@
                 <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">1/5th tsp lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
                 <li class="us" style="display:none;"><i>optionally 1 tbsp oats (0.36 oz)</i></li>
             </ul>
-            <!-- end ingredients list -->
             <h3>Instructions:</h3>
             <ol>
                 <li>Mash banana with fork until it is quite smooth.</li>
@@ -281,7 +277,6 @@
                 content.style.display = "block";
             }
         }
-        // end measurement toggle function
 
         const commentForm = document.getElementById('comment-form');
         const commentsList = document.getElementById('comments-list');
