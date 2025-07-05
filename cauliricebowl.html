@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cauliflower rice bowl</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fffaf0;
+            color: #4a4a4a;
+            padding: 2rem;
+        }
+        h1 {
+            color: #ff704d;
+        }
+        .dropdown {
+            margin: 1rem 0;
+            border: 1px solid #ff704d;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .dropdown-header {
+            background-color: #ff704d;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .dropdown-content {
+            display: none;
+            padding: 1rem;
+            background-color: #ffe6d1;
+        }
+        .dropdown-content p {
+            margin: 0.5rem 0;
+        }
+        .dropdown-content ul {
+            padding-left: 20px;
+        }
+        #comments-list {
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid #ff9a7b;
+            padding-top: 1rem;
+        }
+        .comment {
+            background: #fff4e6;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .comment p {
+            margin: 0 0 0.5rem 0;
+            white-space: pre-wrap;
+        }
+        .comment img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .comment button.delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ff5c33;
+            border: none;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+        .comment button.delete-btn:hover {
+            background: #e04a29;
+        }
+        form#comment-form {
+            display: flex;
+            flex-direction: column;
+        }
+        form#comment-form textarea {
+            resize: vertical;
+            min-height: 80px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ff704d;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        form#comment-form input[type="file"] {
+            margin-bottom: 0.5rem;
+        }
+        form#comment-form button {
+            align-self: flex-start;
+            background-color: #ff704d;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        form#comment-form button:hover {
+            background-color: #e6603f;
+        }
+
+        #pl-link-container {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+   #pl-link-container {
+margin-top: 4rem;
+text-align: center;
+font-size: 2rem;
+}
+#pl-link-container a {
+color: #ff704d;
+text-decoration: none;
+font-weight: 600;
+border: 2px solid #ff704d;
+padding: 0.3rem 0.8rem;
+border-radius: 5px;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+#pl-link-container a:hover {
+background-color: #ff704d;
+color: white;
+}
+.fixed-bottom-text {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 56px;
+        font-size: 1rem;
+        text-align: center;
+        padding: 6px 0;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+        z-index: 9999;
+        margin: 0;
+    }
+.fixed-bottom-text a {
+color: #555;
+text-decoration: none;
+}
+.fixed-bottom-text a:hover,
+.fixed-bottom-text a:focus {
+text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <h1>Cauliflower Rice Bowl</h1>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('time')">Time</div>
+        <div class="dropdown-content" id="time">
+            <p>Total time: 25-40 min, depending if others are cooking as well</p>
+            <p>Prep time: 7-20 min (depends how good you are at chopping stuff)</p>
+            <p>cook time: 13 min</p>
+            <p>Clean + pack-away time: 5-7 min without dishwasher</p>
+        </div>
+    </div>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('recipe')">Recipe</div>
+        <div class="dropdown-content" id="recipe">
+            <h3>Ingredients:</h3>
+             <div class="measurement-toggle">
+                <button id="metric-btn" class="active-unit" onclick="toggleMeasurement('metric')">Metric</button>
+                <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
+            </div>
+            <ul id="ingredients-list">
+                <li class="metric"><input type="checkbox" id="garlic"> <label for="garlic">water & salt</label></li>
+                <li class="metric"><input type="checkbox" id="onions"> <label for="onions">1/2 large skinless chicken breast (110g)</label></li>
+                <li class="metric"><input type="checkbox" id="tomato"> <label for="tomato">1/2 tsp (2.3g) baking soda</label></li>
+                <li class="metric"><input type="checkbox" id="tofu"> <label for="tofu">1 tbsp (15g) vinegar</label></li>
+                <li class="metric"><input type="checkbox" id="soyMilk"><label for="soyMilk">12g (3-4 cloves, 4 tsp) garlic</label></li>
+                <li class="metric"><input type="checkbox" id="sesameOil"> <label for="sesameOil">40g onion (4 tbsp, 1/2 small onion)</label></li>
+                <li class="metric"><input type="checkbox" id="kalaNamak"> <label for="kalaNamak">40g (7 tbsp) shiitake</label></li>
+                <li class="metric"><input type="text" id="star"> <label for="star">150g (1.5 cup) cauliflower</li>
+                
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">water and salt</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="onions-us"> <label for="onions-us">1/2 large skinless chicken breast(3.88 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="tofu-u"> <label for="tofu-u">1/2 tsp (0.08 oz) baking soda</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="soyMilk-u"><label for="soyMilk-u">1 tbsp (0.53 oz) vinegar</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="sesameOil-u"> <label for="sesameOil-u">0.42 oz (3-4 cloves, 4 tsp) garlic</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="kalaNamak-u"> <label for="kalaNamak-u">1.41 oz onion (4 tbsp, 1/2 small onion)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="turmeric-u"> <label for="turmeric-u">1.41 oz (7.1 tbsp) shiitake</label></li>
+                <li class="us" style="display:none;"><input type="text" id="star-u"> <label for="star-u">5.29 oz (1.4 cup) cauliflower</label></li>
+            </ul>
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Boil water</li>
+                <li>Cut chicken into strips and marinate in baking soda, salt & rice vinegar. Add a little water too</i></li>
+                <li>Chop garlic and slice onion & mushrooms</li>
+                <li>Boil cauliflower <i>to soften</i>, then chop and crush/blend.</li>
+                <li>Simmer water and poach chicken in it</li>
+                <li>Use a little water to pan-"steam" cauliflower rice. Transfer to bowl</li>
+                <li>Cut chicken to check for tenderness, stop cooking when tender.</li>
+                <li>Heat garlic and onion in pan, using water. Add a bit more water to sautee the other veggies.</li>
+                <li>Add chicken & veg to the rice</li> 
+                <li>Crack egg in bowl. <i>If you are talented enough, skip this step</i></li>
+                <li>Heat sesame oil in pan, then pour in the egg, placing the yolk in the centre. <i>Or crack egg over pan if you can do it well.</i></li>   
+            </ol>
+            <h3>Changing recipe suggestions:</h3>
+            <ul>
+                <li>only 1 tbsp of milk is required per egg. Less milk = cooks faster</li>
+                <li>Any milk goes. Same volume. Water works too, same volume</li>
+                <li>Add whatever herbs and spices</li>
+                <li>Add whatever other toppings to the sandwich. They should small and/or thin, though/li>
+            </ul>
+        </div>
+    </div>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('nutrition')">Nutrition</div>
+        <div class="dropdown-content" id="nutrition">
+            <h3>NUTRITION PER SANDWICH (384g)</h3>
+            <P>MAKES 1 SANDWICH</P>
+            <p><b>MyNetDiary Grade: A-</b>
+            <p>(10%) = 10% of daily value based on 2000kcal/8368kJ diet</p>
+            <i>Generally, 5% or less dv is considered low, while 20+% is considered high)</i></p>
+            <p><i></i></p>
+            <p>Calories: 402 kcal/ 866 kJ (10.35%)</p>
+            <p>Fat: 13.1g (17%)</p>
+            <ul>
+            <p>Saturated: 3.4g (16%)</p>
+            <p>Unsaturated: 3.4g (16%)</p>
+            <p>⠀- Monounsaturated: 0.8g</p>
+            <p>⠀- Polyunsaturated: 1g</p>
+            </ul>
+            <p>Carbs: 34.4g (13%)</p>
+            <ul>
+            <p>Fiber: 2g (7%)</p>
+            <p>Sugars: 5.5g</p>
+            <p>⠀- Free sugars: 0g</p2>
+            </ul>
+            <p>Protein: 36.9g (74%)</p>
+            <p>Cholesterol: 343mg (114%)</p>
+            <p>Sodium [salt equivalent]: 667mg [1.6675g] (29%)</p>
+            <p>Calcium: 209mg (16%)</p>
+            <p>Potassium: 420mg (9%)</p>
+            <p>Magnesium: 35mg (8%)</p>
+            <p>Iron: 2.4mg (13%)</p>
+            <p>Zinc: 0.6mg (5%)</p>
+            <p><u>Nutriennts this meal is high in</u></p>
+            <p>Vit K 32mg (27%)</p>
+            <p>Thiamin 1.1mg (92%)</p>
+            <p>Vit B1/Riboflavin 0.4mg (31%)</p>
+            <p>Vit B2/ Niacin 9mg (56%)</p>
+            <p>Vit B6/Pyridoxine 0.74mg (44%)</p>
+            <p>Total folate 113mcg (28%)</p>
+            <p>Vit B12/Cobalamin 0.85mcg (35%)</p>
+            <p>Selenium 24mcg (44%)</p>
+            <p>Iodine 67mcg (45%)</p>
+            <p>Molybdenum 35.5mcg (79%)</p>
+        </div>
+    </div>
+&nbsp;
+&nbsp;
+
+    <div class="dropdown">
+        <div class="dropdown-header" onclick="toggleDropdown('comments')">Comments</div>
+        <div class="dropdown-content" id="comments">
+            <form id="comment-form">
+                <label for="comment-text">Write your comment:</label>
+                <textarea id="comment-text" placeholder="Hmm..." required></textarea>
+                <label for="comment-photo">Do you wanna share a photo? You don't have to share a photo.</label>
+                <input type="file" id="comment-photo" accept="image/*" />
+                <button type="submit">Post Comment</button>
+            </form>
+            <div id="comments-list"></div>
+        </div>
+    </div>
+
+    <p><a href="index.html">Country roads, take me hooooooooome (home page)</a></p>
+&nbsp;
+&nbsp;
+
+    <script>
+        function toggleDropdown(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        const commentForm = document.getElementById('comment-form');
+        const commentsList = document.getElementById('comments-list');
+        const commentText = document.getElementById('comment-text');
+        const commentPhoto = document.getElementById('comment-photo');
+
+        let comments = [];
+        const storageKey = 'bananaBlondieComments';
+
+        function loadComments() {
+            const data = localStorage.getItem(storageKey);
+            if (data) {
+                comments = JSON.parse(data);
+            } else {
+                comments = [];
+            }
+            renderComments();
+        }
+
+        function renderComments() {
+            commentsList.innerHTML = '';
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p>Be 1st commenter! Or not; your choice. </p>';
+                return;
+            }
+            comments.forEach((comment, index) => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+
+                const textP = document.createElement('p');
+                textP.textContent = comment.text;
+                commentDiv.appendChild(textP);
+
+                if (comment.photoDataUrl) {
+                    const img = document.createElement('img');
+                    img.src = comment.photoDataUrl;
+                    img.alt = 'User uploaded photo';
+                    commentDiv.appendChild(img);
+                }
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.title = 'Delete this comment';
+                deleteBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to delete this comment?')) {
+                        deleteComment(index);
+                    }
+                });
+                commentDiv.appendChild(deleteBtn);
+
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        commentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const textValue = commentText.value.trim();
+            if (textValue === '') {
+                alert('Please enter a comment.');
+                return;
+            }
+
+            if (commentPhoto.files.length > 0) {
+                const file = commentPhoto.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newComment = {
+                        text: textValue,
+                        photoDataUrl: e.target.result
+                    };
+                    comments.push(newComment);
+                    saveComments();
+                    renderComments();
+                    commentForm.reset();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const newComment = {
+                    text: textValue,
+                    photoDataUrl: null
+                };
+                comments.push(newComment);
+                saveComments();
+                renderComments();
+                commentForm.reset();
+            }
+        });
+
+        function saveComments() {
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+        }
+
+        function deleteComment(index) {
+            comments.splice(index, 1);
+            saveComments();
+            renderComments();
+        }
+          function toggleMeasurement(unit) {
+            const metricItems = document.querySelectorAll('.metric');
+            const usItems = document.querySelectorAll('.us');
+            const metricBtn = document.getElementById('metric-btn');
+            const usBtn = document.getElementById('us-btn');
+
+            if (unit === 'metric') {
+                metricItems.forEach(item => item.style.display = 'list-item');
+                usItems.forEach(item => item.style.display = 'none');
+                metricBtn.classList.add('active-unit');
+                usBtn.classList.remove('active-unit');
+            } else {
+                metricItems.forEach(item => item.style.display = 'none');
+                usItems.forEach(item => item.style.display = 'list-item');
+                metricBtn.classList.remove('active-unit');
+                usBtn.classList.add('active-unit');
+            }
+        }
+        loadComments();
+    </script>
+    <div id="pd-link-container">
+        <p class="fixed-bottom-text"><a href="PLcode.html">May you support me? Because I'm not getting paid for any of this</a></p>
+    </div>
+</body>
+</html>
