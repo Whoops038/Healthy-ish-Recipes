@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Microwave Banana Blondie</title>
+    <title>Chips</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
         body {
@@ -190,30 +190,23 @@
                 <button id="us-btn" onclick="toggleMeasurement('us')">US</button>
             </div>
             <ul id="ingredients-list">
-                <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1 small  banana (90g)</label></li>
-                <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1 large egg (50g)</label></li>
-                <li class="metric"><input type="checkbox" id="bgsoda"> <label for="bgsoda">1.5 pinch (0.2g) baking soda</label></li>
-                <li class="metric"><input type="checkbox" id="citrus"> <label for="citrus">1/6th tsp (0.8g) lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
-                <li class="metric"><i>optionally 1 tbsp oats (10.3g)</i></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">1 small banana (3.2 oz)</label></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="egg-us"> <label for="egg-us">1 large egg (1.76 oz)</label></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="bgsoda-us"> <label for="bgsoda-us">1.5 pinch tsp baking soda (0.03 oz)</label></li>
-                <li class="us" style="display:none;"><input type="checkbox" id="citrus-us"> <label for="citrus-us">1/5th tsp lime <i>or any acidic thing e.g. lemon, vinegar, orange</i></label></li>
-                <li class="us" style="display:none;"><i>optionally 1 tbsp oats (0.36 oz)</i></li>
+                <li class="metric"><input type="checkbox" id="banana"> <label for="banana">1/2 medium potato (80g)</label></li>
+                <li class="metric"><input type="checkbox" id="egg"> <label for="egg">1/2 pinch salt</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="banana-us"> <label for="banana-us">1/2 medium potato (2.82 oz)</label></li>
+                <li class="us" style="display:none;"><input type="checkbox" id="egg-us"> <label for="egg-us">pinch of salt</label></li> 
             </ul>
             <h3>Instructions:</h3>
             <ol>
-                <li>Mash banana with fork until it is quite smooth.</li>
-                <li>Add everything else and stir until pretty smooth.</li>
-                <li>Microwave on high (1000W) for 1.5 - 2 minutes.</li>
+                <li>Wash and dry potato.</li>
+                <li>Cut 80g potato into thin slices. <i>The thinner they are, the quicker they crisp.</i></li>
+                <li>Press a (paper) towel on both sides of the slices and sprinkle salt thoroughly. Leave for 30+ min. <i>It is a lot of effort to manually completely dry potatoes, but salt is a good dehydrator.</i></li>
+                <li>Transfer the potato slices to a microwave safe material for 3.5 min on high (1000W). <i>Some brands of kitchen towels are microwaveable.</i></li>
             </ol>
             <h3>Changing recipe suggestions:</h3>
             <ul>
-                <p>Flour instead of oats. Same volume flour as you would oats. E.g. use 1 tbsp (7g) AP flour per 1 tbsp (6g) oats.</p>
-                <p>Lower cholesterol egg options and other substitutes are available.</p>
-                <li>1 tsp of citrus (e.g. lemon/lime)</li>
-                <li>1/2 tbsp of honey</li>
-                <li>1/2 tsp vanilla</li>
+                <li>whatever herbs & spices you like. Do this before adding salt.</p>
+                <li>baking soda instead of salt - or anything with similar sodium content</li>
+                <li><i>There is some (not enough) evidence that thyme or rosemary can be used instead of salt for dehydration</i>I have no desire to test this theory.</li>
             </ul>
         </div>
     </div>
@@ -223,28 +216,36 @@
     <div class="dropdown">
         <div class="dropdown-header" onclick="toggleDropdown('nutrition')">Nutrition</div>
         <div class="dropdown-content" id="nutrition">
-            <h3>NUTRITION PER SERVE (300g)</h3>
-            <p><b>MyNetDiary Grade: B+</b></p>
-            <p>(10%) = 10% of daily value based on 2000kcal/8368kJ diet</p>
-            <i>Generally, 5% or less dv is considered low, while 20+% is considered high)</i>
-            <p>Calories: 207 kcal/ 866 kJ (10.35%)</p>
-            <p>Fat: 7.1g (9%)</p>
-            <p>Saturated: 1.2g (6%)</p>
-            <p>Unsaturated: 4.7g (8%)</p>
-            <p>Monounsaturated: 1.9g</p>
-            <p>Polyunsaturated: 2.8g</p>
-            <p>Carbs: 19.5g (7%)</p>
-            <p>Fiber: 8g (29%)</p>
-            <p>Sugars: 5.3g</p>
-            <p>free sugars: NONE</p>
-            <p>Protein: 20.7g (41%)</p>
+            <h3>NUTRITION PER SERVE (10-12 chips)</h3>
+            <p>MAKES 1 SERVE</p>
+            <p><b>MyNetDiary Grade: A-</b></p>
+            <p><b>Key:</b>(10%) = 10% of daily value based on 2000kcal/8368kJ diet</p>
+            <p>0: amount that registers as 0 due to how low it is</p>
+            <p>NONE: absolutely zero</p>
+            <i>Generally, 5% or less dv is considered low, while 20+% is considered high). Includes sodium from salt.</i>
+            <p>Calories: 55 kcal/ 230.12 kJ (3%)</p>
+            <p>Fat: 0.1g (0%)</p>
+            <p>Saturated: 0g (0%)</p>
+            <p>Unsaturated: 0g (0%)</p>
+            <ul>Monounsaturated: 0</ul>
+            <ul>Polyunsaturated: 0</ul>
+            <ul>Trans: NONE</ul>
+            <p>Carbs: 16.9g (6%)</p>
+            <ul>Fiber: 1.7g (6%)</ul>
+            <ul>Sugar: 1.2g</ul>
+            <ul>- Free sugars: 0</ul>
+            <p>Protein: 1.7g (3.4%)</p>
             <p>Cholesterol: NONE</p>
-            <p>Sodium [salt equivalent]: 58mg [0.145g] (3%)</p>
-            <p>Calcium: 152mg (12%)</p>
-            <p>Potassium: 306mg (7%)</p>
-            <p>Magnesium: 17mg (4%)</p>
-            <p>Iron: 1.5mg (8%)</p>
+            <p>Sodium [salt equivalent]: 83mg [0.201g] (3%)</p>
+            <p>Calcium: 8mg (1%)</p>
+            <p>Potassium: 435mg (9%)</p>
+            <p>Magnesium: 22mg (5%)</p>
+            <p>Iron: 0.48mg (3%)</p>
             <p>Zinc: 0.3mg (3%)</p>
+            <h3>Nutrients 2 servings of this snack would be high in:</h3>
+            <p>>Vit C: 10mg (11%)</p
+            <p>Vit B6/cobalamin: 0.17mg (10%)</p>
+            <p>Copper: 0.1 mg (11%)</p>
         </div>
     </div>
     &nbsp;
