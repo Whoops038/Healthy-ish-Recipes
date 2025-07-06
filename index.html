@@ -121,7 +121,7 @@
       margin-bottom: 1.5rem;
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start; /* Align items to the start */
       gap: 1rem;
       padding: 0 10px;
     }
@@ -162,31 +162,30 @@
       outline: none;
     }
 
-   .back-to-top {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ff704d;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 1000;
-}
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff704d;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
 
-.back-to-top:hover,
-.back-to-top:focus {
-  background-color: #cc512d;
-  outline: none;
-}
-
+    .back-to-top:hover,
+    .back-to-top:focus {
+      background-color: #cc512d;
+      outline: none;
+    }
 
     @media (max-width: 480px) {
       header h1 {
@@ -265,50 +264,63 @@
       <div class="recipe-text">
         <p><a href="cauliricebowl.html">Cauliflower Rice Bowl</a></p>
         <p>You can totally tell it's not rice, sad sad. :'(</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
+  
   <div class="recipe" id="C">
-        <img src="cheggwich.png" alt="white toast on bottom, then a thin llayer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
+        <img src="cheggwich.png" alt="white toast on bottom, then a thin layer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
         <div class='recipe-text'>
         <p><a href="cheggwich.html">Chicken, Lettuce & Egg Sandwich</a></p>
         <p>A 𝓈𝒶𝓉𝒾𝓈𝒻𝓎𝒾𝓃𝑔 sandwich with creamy eggs.</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
+  
   <div class="recipe" id="C">
-      <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel="recipe-image" />
+      <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="2inMtatochips.html">Chips but healthy (non-fried)</a></p>
         <p>Chips made without a deep fryer, because you ain't McDonalds.</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
+  
   <div class="recipes">
     <div class="recipe" id="M">
       <img src="MBnBlondie.png" alt="a soft cake stuck to a bowl" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
         <p>A quick and easy dessert made in the microwave with a banaNANA</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
-  <div class="recipe" id="P">
+  
+    <div class="recipe" id="P">
       <img src="tatopancake.png" alt="a black seasoning covering about half the area of what looks like a thick, off-brand pancake" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="tatopancake.html">Cheeseless "Cheesy" Potato Pancakes</a></p>
         <p>I'm sorry for thinking up this nightmare. Then going through with it. Then posting it.</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
   </div>
+  
   <div class="recipe" id="T">
-      <img src="Tiricemisu.png" alt="What apears to be a cylindrical tiramisu" class="recipe-image" />
+      <img src="Tiricemisu.png" alt="What appears to be a cylindrical tiramisu" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
         <p>A healthy <i>twist</i>(more like a complete 180°) on the classic tiramisu using rice cakes and yogurt.</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
+    
     <div class="recipe" id="V">
       <img src="VScrEgg.png" alt="Sofu that looks like scrambled eggs, mixed with sliced roma tomato & onion" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
         <p>As a non-vegan, I can confirm this tastes mostly like egg.</p>
+        <p class="tags">Tags: p1, t1</p>
       </div>
     </div>
     </div>
