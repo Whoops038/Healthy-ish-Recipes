@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+    
+    /* Button styles */
     #nyanButton {
       position: fixed;
       bottom: 20px;
@@ -23,10 +25,12 @@
       transition: background-color 0.3s ease;
       z-index: 1000;
     }
+    
     #nyanButton:hover {
       background-color: #cc512d;
     }
 
+    /* Body styles */
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -39,6 +43,7 @@
       min-height: 100vh;
     }
 
+    /* Header styles */
     header {
       margin-bottom: 1.5rem;
       text-align: center;
@@ -66,6 +71,7 @@
       text-align: center;
     }
 
+    /* Search container styles */
     .search-container {
       width: 100%;
       max-width: 700px;
@@ -82,6 +88,7 @@
       border-radius: 4px;
     }
 
+    /* Alphabet navigation styles */
     nav.alphabet-nav {
       width: 100%;
       max-width: 700px;
@@ -110,6 +117,7 @@
       outline: none;
     }
 
+    /* Recipe styles */
     .recipes {
       width: 100%;
       max-width: 700px;
@@ -121,14 +129,14 @@
       margin-bottom: 1.5rem;
       display: flex;
       flex-direction: row;
-      align-items: flex-start; /* Align items to the start */
+      align-items: center;
       gap: 1rem;
       padding: 0 10px;
     }
 
     .recipe-image {
-      width: auto; /* Maintain aspect ratio */
-      height: 25px; /* Set height to 25 pixels */
+      flex-shrink: 0;
+      height: 75px; /* Set height to 75 pixels */
       border-radius: 8px;
       object-fit: cover;
     }
@@ -160,14 +168,19 @@
       outline: none;
     }
 
+    /* Tag styles */
+    .tags {
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
     .tag {
-      display: inline-block;
       background-color: #ff704d;
       color: white;
       padding: 5px 10px;
       border-radius: 4px;
-      font-size: 0.9rem;
-      margin-right: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
@@ -176,6 +189,7 @@
       background-color: #cc512d;
     }
 
+    /* Back to top button styles */
     .back-to-top {
       position: fixed;
       bottom: 20px;
@@ -201,6 +215,7 @@
       outline: none;
     }
 
+    /* Responsive styles */
     @media (max-width: 480px) {
       header h1 {
         font-size: 2rem;
@@ -222,7 +237,8 @@
         align-items: flex-start;
       }
       .recipe-image {
-        height: 25px; /* Ensure height is 25 pixels */
+        max-height: 150px;
+        width: 100%;
         margin-bottom: 0.5rem;
       }
       .recipe-text {
@@ -272,13 +288,14 @@
     <a href="#Z">Z</a>
   </nav>
 
+  <div class="tags">
+    <div class="tag" onclick="filterRecipes('p1')">p1</div>
+    <div class="tag" onclick="filterRecipes('t1')">t1</div>
+  </div>
+
   <div class="recipe" id="C">
       <img src="cauliricebowl.png" alt="A bowl with cauliflower rice underneath poached chicken breast, mushrooms and juicy-looking onions, topped with a pepper-seasoned fried egg with an off-white egg white and orange yolk occupying about half its area. The yolk's diameter goes from the middle to one end of the white" class="recipe-image" />
       <div class="recipe-text">
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="cauliricebowl.html">Cauliflower Rice Bowl</a></p>
         <p>You can totally tell it's not rice, sad sad. :'(</p>
       </div>
@@ -287,10 +304,6 @@
   <div class="recipe" id="C">
         <img src="cheggwich.png" alt="white toast on bottom, then a thin layer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
         <div class='recipe-text'>
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="cheggwich.html">Chicken, Lettuce & Egg Sandwich</a></p>
         <p>A 𝓈𝒶𝓉𝒾𝓈𝒻𝓎𝒾𝓃𝑔 sandwich with creamy eggs.</p>
       </div>
@@ -299,10 +312,6 @@
   <div class="recipe" id="C">
       <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel" class="recipe-image" />
       <div class="recipe-text">
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="2inMtatochips.html">Chips but healthy (non-fried)</a></p>
         <p>Chips made without a deep fryer, because you ain't McDonalds.</p>
       </div>
@@ -312,22 +321,14 @@
     <div class="recipe" id="M">
       <img src="MBnBlondie.png" alt="a soft cake stuck to a bowl" class="recipe-image" />
       <div class="recipe-text">
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
         <p>A quick and easy dessert made in the microwave with a banaNANA</p>
       </div>
     </div>
-  
+    
     <div class="recipe" id="P">
       <img src="tatopancake.png" alt="a black seasoning covering about half the area of what looks like a thick, off-brand pancake" class="recipe-image" />
       <div class="recipe-text">
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="tatopancake.html">Cheeseless "Cheesy" Potato Pancakes</a></p>
         <p>I'm sorry for thinking up this nightmare. Then going through with it. Then posting it.</p>
       </div>
@@ -337,10 +338,6 @@
   <div class="recipe" id="T">
       <img src="Tiricemisu.png" alt="What appears to be a cylindrical tiramisu" class="recipe-image" />
       <div class="recipe-text">
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
         <p>A healthy <i>twist</i>(more like a complete 180°) on the classic tiramisu using rice cakes and yogurt.</p>
       </div>
@@ -349,10 +346,6 @@
     <div class="recipe" id="V">
       <img src="VScrEgg.png" alt="Sofu that looks like scrambled eggs, mixed with sliced roma tomato & onion" class="recipe-image" />
       <div class="recipe-text">
-        <div class="tags">
-          <span class="tag" onclick="filterRecipes('p1')">p1</span>
-          <span class="tag" onclick="filterRecipes('t1')">t1</span>
-        </div>
         <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
         <p>As a non-vegan, I can confirm this tastes mostly like egg.</p>
       </div>
@@ -380,14 +373,8 @@
     function filterRecipes(tag) {
       const recipes = document.querySelectorAll('.recipe');
       recipes.forEach(recipe => {
-        const tags = recipe.querySelectorAll('.tag');
-        let hasTag = false;
-        tags.forEach(t => {
-          if (t.textContent === tag) {
-            hasTag = true;
-          }
-        });
-        if (hasTag) {
+        // Assuming each recipe has a data-tag attribute for filtering
+        if (recipe.dataset.tag === tag) {
           recipe.style.display = 'flex';
         } else {
           recipe.style.display = 'none';
