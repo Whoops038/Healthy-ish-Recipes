@@ -13,7 +13,407 @@
       right: 20px;
       background-color: #ff704d;
       color: white;
+      border: none<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recipe Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+    #nyanButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff704d;
+      color: white;
       border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    #nyanButton:hover {
+      background-color: #cc512d;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffaf0;
+      color: #4a4a4a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    header {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    header h1 {
+      font-family: 'Comforter Brush', cursive;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #ff704d;
+      margin: 0;
+      text-transform: lowercase;
+      letter-spacing: 3px;
+    }
+
+    header p {
+      font-weight: 400;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0.5rem auto 2rem;
+      color: #666666;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .search-container {
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    #search {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    nav.alphabet-nav {
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+
+    nav.alphabet-nav a {
+      margin: 0 6px;
+      text-decoration: none;
+      color: #ff704d;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav.alphabet-nav a:hover,
+    nav.alphabet-nav a:focus {
+      color: #fffaf0;
+      background-color: #cc512d;
+      outline: none;
+    }
+
+    .recipes {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .recipe {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start; /* Align items to the start */
+      gap: 1rem;
+      padding: 0 10px;
+    }
+
+    .recipe-image {
+      width: 100px; /* Fixed width for alignment */
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .recipe-text {
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .recipe-text p {
+      margin: 0.2rem 0;
+    }
+
+    .recipe-text a {
+      color: #ff704d;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .recipe-text a:hover,
+    .recipe-text a:focus {
+      color: #cc512d;
+      border-color: #cc512d;
+      outline: none;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #ff704d;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      margin-right: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .tag:hover {
+      background-color: #cc512d;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff704d;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus {
+      background-color: #cc512d;
+      outline: none;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav.alphabet-nav a {
+        font-size: 0.9rem;
+        margin: 0 4px;
+        padding: 2px 5px;
+      }
+      .recipe-text a {
+        font-size: 1rem;
+      }
+      .back-to-top {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .recipe {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .recipe-image {
+        width: 100%;
+        max-height: 150px;
+        margin-bottom: 0.5rem;
+      }
+      .recipe-text {
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body id="top">
+  <header>
+    <h1>Healthy-ish Recipes</h1>
+    <p>Food but healthier</p>
+  </header>
+  
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search for recipes..." aria-label="Search recipes" />
+  </div>
+
+  <nav class="alphabet-nav" aria-label="Recipe alphabetical navigation">
+    <a href="#A">A</a>
+    <a href="#B">B</a>
+    <a href="#C">C</a>
+    <a href="#D">D</a>
+    <a href="#E">E</a>
+    <a href="#F">F</a>
+    <a href="#G">G</a>
+    <a href="#H">H</a>
+    <a href="#I">I</a>
+    <a href="#J">J</a>
+    <a href="#K">K</a>
+    <a href="#L">L</a>
+    <a href="#M">M</a>
+    <a href="#N">N</a>
+    <a href="#O">O</a>
+    <a href="#P">P</a>
+    <a href="#Q">Q</a>
+    <a href="#R">R</a>
+    <a href="#S">S</a>
+    <a href="#T">T</a>
+    <a href="#U">U</a>
+    <a href="#V">V</a>
+    <a href="#W">W</a>
+    <a href="#X">X</a>
+    <a href="#Y">Y</a>
+    <a href="#Z">Z</a>
+  </nav>
+
+  <div class="recipe" id="C">
+      <img src="cauliricebowl.png" alt="A bowl with cauliflower rice underneath poached chicken breast, mushrooms and juicy-looking onions, topped with a pepper-seasoned fried egg with an off-white egg white and orange yolk occupying about half its area. The yolk's diameter goes from the middle to one end of the white" class="recipe-image" />
+      <div class="recipe-text">
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="cauliricebowl.html">Cauliflower Rice Bowl</a></p>
+        <p>You can totally tell it's not rice, sad sad. :'(</p>
+      </div>
+    </div>
+  
+  <div class="recipe" id="C">
+        <img src="cheggwich.png" alt="white toast on bottom, then a thin layer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
+        <div class='recipe-text'>
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="cheggwich.html">Chicken, Lettuce & Egg Sandwich</a></p>
+        <p>A 𝓈𝒶𝓉𝒾𝓈𝒻𝓎𝒾𝓃𝑔 sandwich with creamy eggs.</p>
+      </div>
+    </div>
+  
+  <div class="recipe" id="C">
+      <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel" class="recipe-image" />
+      <div class="recipe-text">
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="2inMtatochips.html">Chips but healthy (non-fried)</a></p>
+        <p>Chips made without a deep fryer, because you ain't McDonalds.</p>
+      </div>
+    </div>
+  
+  <div class="recipes">
+    <div class="recipe" id="M">
+      <img src="MBnBlondie.png" alt="a soft cake stuck to a bowl" class="recipe-image" />
+      <div class="recipe-text">
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
+        <p>A quick and easy dessert made in the microwave with a banaNANA</p>
+      </div>
+    </div>
+  
+    <div class="recipe" id="P">
+      <img src="tatopancake.png" alt="a black seasoning covering about half the area of what looks like a thick, off-brand pancake" class="recipe-image" />
+      <div class="recipe-text">
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="tatopancake.html">Cheeseless "Cheesy" Potato Pancakes</a></p>
+        <p>I'm sorry for thinking up this nightmare. Then going through with it. Then posting it.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="recipe" id="T">
+      <img src="Tiricemisu.png" alt="What appears to be a cylindrical tiramisu" class="recipe-image" />
+      <div class="recipe-text">
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
+        <p>A healthy <i>twist</i>(more like a complete 180°) on the classic tiramisu using rice cakes and yogurt.</p>
+      </div>
+    </div>
+    
+    <div class="recipe" id="V">
+      <img src="VScrEgg.png" alt="Sofu that looks like scrambled eggs, mixed with sliced roma tomato & onion" class="recipe-image" />
+      <div class="recipe-text">
+        <div class="tags">
+          <span class="tag" onclick="filterRecipes('p1')">p1</span>
+          <span class="tag" onclick="filterRecipes('t1')">t1</span>
+        </div>
+        <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
+        <p>As a non-vegan, I can confirm this tastes mostly like egg.</p>
+      </div>
+    </div>
+    </div>
+
+  <a href="#top" class="back-to-top" aria-label="Back to top">Back to Top</a>
+  <button id="nyanButton" aria-label="Go to Nyan Cats page" onclick="location.href='CATS.html'">CATS!!!</button>
+
+  <script>
+    document.getElementById('search').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const recipes = document.querySelectorAll('.recipe');
+
+      recipes.forEach(recipe => {
+        const title = recipe.querySelector('a').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          recipe.style.display = 'flex';
+        } else {
+          recipe.style.display = 'none';
+        }
+      });
+    });
+
+    function filterRecipes(tag) {
+      const recipes = document.querySelectorAll('.recipe');
+      recipes.forEach(recipe => {
+        const tags = recipe.querySelectorAll('.tag');
+        let hasTag = false;
+        tags.forEach(t => {
+          if (t.textContent === tag) {
+            hasTag = true;
+          }
+        });
+        if (hasTag) {
+          recipe.style.display = 'flex';
+        } else {
+          recipe.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
       padding: 12px 20px;
       border-radius: 6px;
       font-weight: 700;
