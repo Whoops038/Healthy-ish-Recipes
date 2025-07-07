@@ -287,24 +287,24 @@
   </nav>
 
   <div class="tags">
-    <div class="tag" onclick="toggleFilter('Vegt')">Vegt</div>
-    <div class="tag" onclick="toggleFilter('Can be vegt')">Can be vegt</div>
+    <div class="tag" onclick="toggleFilter('Vgt')">Vegt</div>
+    <div class="tag" onclick="toggleFilter('VgtO')">Can be vegt</div>
     <div class="tag" onclick="toggleFilter('Vgn')">Vgn</div>
-    <div class="tag" onclick="toggleFilter('Can be vgn')">Can be vgn</div>
+    <div class="tag" onclick="toggleFilter('VgnO')">Can be vgn</div>
     <div class="tag" onclick="toggleFilter('GF')">GF</div>
-    <div class="tag" onclick="toggleFilter('Can be GF')">Can be GF</div>
-    <div class="tag" onclick="toggleFilter('Has dairy')">Has dairy</div>
-    <div class="tag" onclick="toggleFilter('Dairy-free')">Dairy-free</div>
-    <div class="tag" onclick="toggleFilter('Can have dairy')">Can have dairy</div>
-    <div class="tag" onclick="toggleFilter('Can be dairy-free')">Can be dairy-free</div>
-    <div class="tag" onclick="toggleFilter('Nutrient dense')">Nutrient-dense</div>
-    <div class="tag" onclick="toggleFilter('Calorie-dense')">High caloric density</div>
-    <div class="tag" onclick="toggleFilter('Non-calorie-dense')">Low caloric density</div>
-    <div class="tag" onclick="toggleFilter('Less than 5 minutes of non-idleness')">Under 5 minutes of non-idleness</div>
-    <div class="tag" onclick="toggleFilter('Easy to clean afterwards')">Easy cleaning</div>
+    <div class="tag" onclick="toggleFilter('GFO')">Can be GF</div>
+    <div class="tag" onclick="toggleFilter('D')">Has dairy</div>
+    <div class="tag" onclick="toggleFilter('DF')">Dairy-free</div>
+    <div class="tag" onclick="toggleFilter('DO')">Can have dairy</div>
+    <div class="tag" onclick="toggleFilter('DFO')">Can be dairy-free</div>
+    <div class="tag" onclick="toggleFilter('NtD')">Nutrient-dense</div>
+    <div class="tag" onclick="toggleFilter('HC')">High caloric density</div>
+    <div class="tag" onclick="toggleFilter('LC')">Low caloric density</div>
+    <div class="tag" onclick="toggleFilter('Idle')">Under 5 minutes of non-idleness</div>
+    <div class="tag" onclick="toggleFilter('Clean')">Easy cleaning</div>
   </div>
 
-  <div class="recipe" id="C" data-tag="p1">
+  <div class="recipe" id="C" data-tag="DF GF NtD LC DO VgtO VgnO">
       <img src="cauliricebowl.png" alt="A bowl with cauliflower rice underneath poached chicken breast, mushrooms and juicy-looking onions, topped with a pepper-seasoned fried egg with an off-white egg white and orange yolk occupying about half its area. The yolk's diameter goes from the middle to one end of the white" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="cauliricebowl.html">Cauliflower Rice Bowl</a></p>
@@ -318,14 +318,12 @@
           <span class="tag">Can have dairy</span>
           <span class="tag">Can be vegt</span>
           <span class="tag">Low caloric density</span>
-          <span class="tag">Can have dairy</span>
-          <span class="tag">Can be vegt</span>
           <span class="tag">Can be vgn</span>
         </div>
       </div>
     </div>
     
-    <div class="recipe" id="P" data-tag="t1">
+    <div class="recipe" id="C" data-tag="Vgn Vgt DF Idle Clean">
       <img src="tatopancake.png" alt="a black seasoning covering about half the area of what looks like a thick, off-brand pancake" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="tatopancake.html">Cheeseless "Cheesy" Potato Pancakes</a></p>
@@ -342,7 +340,7 @@
     </div>
 
   
-  <div class="recipe" id="C" data-tag="p1">
+  <div class="recipe" id="C" data-tag="D NtD DFO GFO">
         <img src="cheggwich.png" alt="white toast on bottom, then a thin layer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
         <div class='recipe-text'>
         <p><a href="cheggwich.html">Chicken, Lettuce & Egg Sandwich</a></p>
@@ -350,7 +348,6 @@
         <p>A 𝓈𝒶𝓉𝒾𝓈𝒻𝓎𝒾𝓃𝑔 sandwich with creamy eggs.</p>
         <div class="recipe-tags">
           <span class="tag">Dairy</span>
-          <span class="tag">High-protein</span>
           <span class="tag">Nutrient dense</span>
           <span class="tag">Can be dairy-free</span>
           <span class="tag">Can be GF</span>
@@ -358,7 +355,7 @@
       </div>
     </div>
   
-  <div class="recipe" id="C" data-tag="p1">
+  <div class="recipe" id="C" data-tag="Vgn Vgt DF Idle Clean HC">
       <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="2inMtatochips.html">Chips but healthy (non-fried)</a></p>
@@ -376,7 +373,7 @@
     </div>
 
 
-  <div class="recipe" id="C" data-tag="p1">
+  <div class="recipe" id="M" data-tag="Vgt DF GF VgnO Clean Idle">
       <img src="tofegg.png" alt="A yellowish jelly-like thing the shape of an upside-down bowl, covered in a translcent brown sauce" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="tofegg.html">Mashed tofu and egg</a></p>
@@ -387,12 +384,14 @@
           <span class="tag">Dairy-free</span>
           <span class="tag">GF</span>
           <span class="tag">Can be vgn</span>
+          <span class="tag">Easy cleaning</span>
+          <span class="tag">Under 5 minutes of non-idleness</span>   
         </div>
       </div>
     </div>
   
   <div class="recipes">
-    <div class="recipe" id="M" data-tag="t1">
+    <div class="recipe" id="M" data-tag="Vgt DF DO NtD Idle Clean GFO VgnO">
       <img src="MBnBlondie.png" alt="a soft cake stuck to a bowl" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
@@ -406,13 +405,13 @@
           <span class="tag">Under 5 minutes of non-idleness</span>
           <span class="tag">Easy cleaning</span>
           <span class="tag">Can be GF</span>
-          
+          <span class="tag">Can be vgn</span>          
         </div>
       </div>
     </div>
 
   
-  <div class="recipe" id="T" data-tag="t1">
+  <div class="recipe" id="R" data-tag="Vgt GFO D DFO LC Clean Idle">
       <img src="Tiricemisu.png" alt="What appears to be a cylindrical tiramisu" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
@@ -425,12 +424,13 @@
           <span class="tag">Can be dairy-free</span>
           <span class="tag">Low caloric density</span>
           <span class="tag">Easy cleaning</span>
+          <span class="tag">Under 5 minutes of non-idleness</span>
         </div>
       </div>
     </div>
     
-    <div class="recipe" id="V" data-tag="t1">
-      <img src="VScrEgg.png" alt="Sofu that looks like scrambled eggs, mixed with sliced roma tomato & onion" class="recipe-image" />
+    <div class="recipe" id="V" data-tag="Vgn Vgt GF DF DO LC">
+      <img src="VScrEgg.png" alt="Tofu that looks like scrambled eggs, mixed with sliced roma tomato & onion" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
         <p>As a non-vegan, I can confirm this tastes mostly like egg.</p>
