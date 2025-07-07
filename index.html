@@ -8,7 +8,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
     
-    /* Button styles */
     #nyanButton {
       position: fixed;
       bottom: 20px;
@@ -30,7 +29,6 @@
       background-color: #cc512d;
     }
 
-    /* Body styles */
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
@@ -43,7 +41,6 @@
       min-height: 100vh;
     }
 
-    /* Header styles */
     header {
       margin-bottom: 1.5rem;
       text-align: center;
@@ -71,7 +68,6 @@
       text-align: center;
     }
 
-    /* Search container styles */
     .search-container {
       width: 100%;
       max-width: 700px;
@@ -88,7 +84,6 @@
       border-radius: 4px;
     }
 
-    /* Alphabet navigation styles */
     nav.alphabet-nav {
       width: 100%;
       max-width: 700px;
@@ -117,7 +112,6 @@
       outline: none;
     }
 
-    /* Recipe styles */
     .recipes {
       width: 100%;
       max-width: 700px;
@@ -136,13 +130,13 @@
 
     .recipe-image {
       flex-shrink: 0;
-      height: 75px; /* Set height to 75 pixels */
+      height: 75px;
       border-radius: 8px;
       object-fit: cover;
     }
 
     .recipe-text {
-      text-align: left;
+      text-align: center;
       flex-grow: 1;
     }
 
@@ -168,7 +162,6 @@
       outline: none;
     }
 
-    /* Tag styles */
     .tags {
       margin: 1rem 0;
       display: flex;
@@ -189,7 +182,13 @@
       background-color: #cc512d;
     }
 
-    /* Back to top button styles */
+    .recipe-tags {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
     .back-to-top {
       position: fixed;
       bottom: 20px;
@@ -215,7 +214,6 @@
       outline: none;
     }
 
-    /* Responsive styles */
     @media (max-width: 480px) {
       header h1 {
         font-size: 2rem;
@@ -289,67 +287,163 @@
   </nav>
 
   <div class="tags">
-    <div class="tag" onclick="filterRecipes('p1')">p1</div>
-    <div class="tag" onclick="filterRecipes('t1')">t1</div>
+    <div class="tag" onclick="toggleFilter('Vegt')">Vegt</div>
+    <div class="tag" onclick="toggleFilter('Can be vegt')">Can be vegt</div>
+    <div class="tag" onclick="toggleFilter('Vgn')">Vgn</div>
+    <div class="tag" onclick="toggleFilter('Can be vgn')">Can be vgn</div>
+    <div class="tag" onclick="toggleFilter('GF')">GF</div>
+    <div class="tag" onclick="toggleFilter('Can be GF')">Can be GF</div>
+    <div class="tag" onclick="toggleFilter('Has dairy')">Has dairy</div>
+    <div class="tag" onclick="toggleFilter('Dairy-free')">Dairy-free</div>
+    <div class="tag" onclick="toggleFilter('Can have dairy')">Can have dairy</div>
+    <div class="tag" onclick="toggleFilter('Can be dairy-free')">Can be dairy-free</div>
+    <div class="tag" onclick="toggleFilter('Nutrient dense')">Nutrient-dense</div>
+    <div class="tag" onclick="toggleFilter('Calorie-dense')">High caloric density</div>
+    <div class="tag" onclick="toggleFilter('Non-calorie-dense')">Low caloric density</div>
+    <div class="tag" onclick="toggleFilter('Less than 5 minutes of non-idleness')">Under 5 minutes of non-idleness</div>
+    <div class="tag" onclick="toggleFilter('Easy to clean afterwards')">Easy cleaning</div>
   </div>
 
-  <div class="recipe" id="C">
+  <div class="recipe" id="C" data-tag="p1">
       <img src="cauliricebowl.png" alt="A bowl with cauliflower rice underneath poached chicken breast, mushrooms and juicy-looking onions, topped with a pepper-seasoned fried egg with an off-white egg white and orange yolk occupying about half its area. The yolk's diameter goes from the middle to one end of the white" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="cauliricebowl.html">Cauliflower Rice Bowl</a></p>
-        <p>You can totally tell it's not rice, sad sad. :'(</p>
-      </div>
-    </div>
-  
-  <div class="recipe" id="C">
-        <img src="cheggwich.png" alt="white toast on bottom, then a thin layer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
-        <div class='recipe-text'>
-        <p><a href="cheggwich.html">Chicken, Lettuce & Egg Sandwich</a></p>
-        <p>A 𝓈𝒶𝓉𝒾𝓈𝒻𝓎𝒾𝓃𝑔 sandwich with creamy eggs.</p>
-      </div>
-    </div>
-  
-  <div class="recipe" id="C">
-      <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel" class="recipe-image" />
-      <div class="recipe-text">
-        <p><a href="2inMtatochips.html">Chips but healthy (non-fried)</a></p>
-        <p>Chips made without a deep fryer, because you ain't McDonalds.</p>
-      </div>
-    </div>
-  
-  <div class="recipes">
-    <div class="recipe" id="M">
-      <img src="MBnBlondie.png" alt="a soft cake stuck to a bowl" class="recipe-image" />
-      <div class="recipe-text">
-        <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
-        <p>A quick and easy dessert made in the microwave with a banaNANA</p>
+        <p>You can totally tell it's not rice.</p>
+        <p>309 kcal| Fat: 12.4g| Saturated fat: 2.9g|  Net carbs: 14g| Fibre: 5g| Free sugars: 0g| Protein: 33.5g| Sodium: 865mg| Cholesterol: 255mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Dairy-free</span>
+          <span class="tag">GF</span>
+          <span class="tag">Nutrient-dense</span>
+          <span class="tag">Low caloric density</span>
+          <span class="tag">Can have dairy</span>
+          <span class="tag">Can be vegt</span>
+          <span class="tag">Low caloric density</span>
+          <span class="tag">Can have dairy</span>
+          <span class="tag">Can be vegt</span>
+          <span class="tag">Can be vgn</span>
+        </div>
       </div>
     </div>
     
-    <div class="recipe" id="P">
+    <div class="recipe" id="P" data-tag="t1">
       <img src="tatopancake.png" alt="a black seasoning covering about half the area of what looks like a thick, off-brand pancake" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="tatopancake.html">Cheeseless "Cheesy" Potato Pancakes</a></p>
         <p>I'm sorry for thinking up this nightmare. Then going through with it. Then posting it.</p>
+        <p>282 kcal| Fat: 4g| Saturated fat: 0.4g|  Net carbs: 52.8g| Fibre: 4.4g| Free sugars: 0g| Protein: 4g| Sodium: 168mg| Cholesterol: 0mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Vgn</span>
+          <span class="tag">Vegt</span>
+          <span class="tag">Dairy-free</span>
+          <span class="tag">Under 5 minutes of non-idleness</span>
+          <span class="tag">Easy to clean afterwards</span>
+        </div>
       </div>
     </div>
-  </div>
+
   
-  <div class="recipe" id="T">
+  <div class="recipe" id="C" data-tag="p1">
+        <img src="cheggwich.png" alt="white toast on bottom, then a thin layer of lettuce and a medium-thickness layer of scrambled eggs topped with lettuce, chicken and another white toast" class="recipe-image" />
+        <div class='recipe-text'>
+        <p><a href="cheggwich.html">Chicken, Lettuce & Egg Sandwich</a></p>
+        <p>402 kcal| Fat: 13.1g| Saturated fat: 3.4g|  Net carbs: 32.4g| Fibre: 2g| Free sugars: 0g| Protein: 36.9g| Sodium: 667mg| Cholesterol: 343 mg</p>
+        <p>A 𝓈𝒶𝓉𝒾𝓈𝒻𝓎𝒾𝓃𝑔 sandwich with creamy eggs.</p>
+        <div class="recipe-tags">
+          <span class="tag">Dairy</span>
+          <span class="tag">High-protein</span>
+          <span class="tag">Nutrient dense</span>
+          <span class="tag">Can be dairy-free</span>
+          <span class="tag">Can be GF</span>
+        </div>
+      </div>
+    </div>
+  
+  <div class="recipe" id="C" data-tag="p1">
+      <img src="2inMtatochips.png" alt="An imperfect rectangle of chips, about 3x4, with some mostly brown, some mostly golden, some half-half, laid on a paper towel" class="recipe-image" />
+      <div class="recipe-text">
+        <p><a href="2inMtatochips.html">Chips but healthy (non-fried)</a></p>
+        <p>Chips made without a deep fryer, because you ain't McDonalds.</p>
+        <p>55 kcal| Fat: 0.1g| Saturated fat: 0g|  Net carbs: 45.2g| Fibre: 1.7g| Free sugars: 1.2g| Protein: 1.7g| Sodium: 83mg| Cholesterol: 0mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Vgn</span>
+          <span class="tag">Vegt</span>
+          <span class="tag">Dairy-free</span>
+          <span class="tag">Under 5 minutes of non-idleness</span>
+          <span class="tag">Easy cleaning</span>
+          <span class="tag">High caloric density</span>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="recipe" id="C" data-tag="p1">
+      <img src="tofegg.png" alt="A yellowish jelly-like thing the shape of an upside-down bowl, covered in a translcent brown sauce" class="recipe-image" />
+      <div class="recipe-text">
+        <p><a href="tofegg.html">Mashed tofu and egg</a></p>
+        <p>Steamed egg but add tofu and use the microwave.</p>
+        <p>152 kcal| Fat: 8.1g| Saturated fat: 2.2g|  Net carbs: 5.2g| Fibre: 0.5g| Free sugars: 0g| Protein: 13g| Sodium: 138mg| Cholesterol: 167mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Vegt</span>
+          <span class="tag">Dairy-free</span>
+          <span class="tag">GF</span>
+          <span class="tag">Can be vgn</span>
+        </div>
+      </div>
+    </div>
+  
+  <div class="recipes">
+    <div class="recipe" id="M" data-tag="t1">
+      <img src="MBnBlondie.png" alt="a soft cake stuck to a bowl" class="recipe-image" />
+      <div class="recipe-text">
+        <p><a href="MicrowaveBananaBlondie.html">Microwave Banana Blondie</a></p>
+        <p>A quick and easy dessert made in the microwave with a banaNANA</p>
+        <p>191 kcal| Fat: 5.9g| Saturated fat: 1.6g|  Net carbs: 25.2g| Fibre: 3.2g| Free sugars: 0g| Protein: 8.1g| Sodium: 315mg| Cholesterol: 185 mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Vegt</span>
+          <span class="tag">Dairy-free</span>
+          <span class="tag">Can have dairy</span>
+          <span class="tag">Nutrient-dense</span>
+          <span class="tag">Under 5 minutes of non-idleness</span>
+          <span class="tag">Easy cleaning</span>
+          <span class="tag">Can be GF</span>
+          
+        </div>
+      </div>
+    </div>
+
+  
+  <div class="recipe" id="T" data-tag="t1">
       <img src="Tiricemisu.png" alt="What appears to be a cylindrical tiramisu" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="Tiricemisu.html">Rice Cake & Yogurt "Tiramisu"</a></p>
         <p>A healthy <i>twist</i>(more like a complete 180°) on the classic tiramisu using rice cakes and yogurt.</p>
+        <p>93 kcal| Fat: 1.1g| Saturated fat: .7g| Net carbs: 13.8g| Fibre: 0.8g| Free sugars: 2.2g| Protein: 3.5g| Sodium: 46mg| Cholesterol: 3mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Vegt</span>
+          <span class="tag">Can be GF</span>
+          <span class="tag">Has dairy</span>
+          <span class="tag">Can be dairy-free</span>
+          <span class="tag">Low caloric density</span>
+          <span class="tag">Easy cleaning</span>
+        </div>
       </div>
     </div>
     
-    <div class="recipe" id="V">
+    <div class="recipe" id="V" data-tag="t1">
       <img src="VScrEgg.png" alt="Sofu that looks like scrambled eggs, mixed with sliced roma tomato & onion" class="recipe-image" />
       <div class="recipe-text">
         <p><a href="VScrEgg.html">Vegan Scrambled "Egg"</a></p>
         <p>As a non-vegan, I can confirm this tastes mostly like egg.</p>
+        <p>207 kcal| Fat: 7.1g| Saturated fat: 1.2g|  Net carbs: 11.5g| Fibre: 8g| Free sugars: 0g| Protein: 20.7g| Sodium: 58mg| Cholesterol: 0mg</p>
+        <div class="recipe-tags">
+          <span class="tag">Vgn</span>
+          <span class="tag">Vegt</span>
+          <span class="tag">GF</span>
+          <span class="tag">Dairy-free</span>
+          <span class="tag">Can have dairy</span>
+          <span class="tag">Low caloric density</span>
+        </div>
       </div>
-    </div>
     </div>
 
   <a href="#top" class="back-to-top" aria-label="Back to top">Back to Top</a>
@@ -370,15 +464,23 @@
       });
     });
 
-    function filterRecipes(tag) {
+    let activeTags = new Set();
+
+    function toggleFilter(tag) {
+      if (activeTags.has(tag)) {
+        activeTags.delete(tag);
+      } else {
+        activeTags.add(tag);
+      }
+      filterRecipes();
+    }
+
+    function filterRecipes() {
       const recipes = document.querySelectorAll('.recipe');
       recipes.forEach(recipe => {
-        // Assuming each recipe has a data-tag attribute for filtering
-        if (recipe.dataset.tag === tag) {
-          recipe.style.display = 'flex';
-        } else {
-          recipe.style.display = 'none';
-        }
+        const recipeTags = recipe.dataset.tag.split(' ');
+        const isVisible = [...activeTags].some(tag => recipeTags.includes(tag));
+        recipe.style.display = isVisible ? 'flex' : 'none';
       });
     }
   </script>
