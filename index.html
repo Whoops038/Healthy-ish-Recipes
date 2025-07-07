@@ -7,6 +7,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+
+        .filter-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .filter-panel {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden by default */
+            width: 300px;
+            height: 100%;
+            background-color: #f9f9f9;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            padding: 20px;
+        }
+        .filter-panel.active {
+            right: 0; /* Slide in */
+        }
+        .filter-range {
+            margin: 10px 0;
+        }
+        .filter-range label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .range-slider {
+            display: flex;
+            align-items: center;
+        }
+    
+        .range-slider input[type="range"] {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .range-slider input[type="number"] {
+            width: 60px;
+        }
     
     #nyanButton {
       position: fixed;
@@ -252,6 +293,104 @@
     <h1>Healthy-ish Recipes</h1>
     <p>Food but healthier</p>
   </header>
+
+    <div class="filter-button" onclick="toggleFilterPanel()">☰</div>
+    
+    <div class="filter-panel" id="filterPanel">
+        <h2>Filters</h2>
+        
+        <div class="filter-range">
+            <label for="fat">Fat (0.0-30.0g):</label>
+            <div class="range-slider">
+                <input type="number" id="fatMin" min="0" max="30" step="0.1" value="0.0" />
+                <input type="range" id="fatRange" min="0" max="30" value="0" />
+                <input type="number" id="fatMax" min="0" max="30" step="0.1" value="30.0" />
+            </div>
+        </div>
+        
+        <div class="filter-range">
+            <label for="saturatedFat">Saturated Fat (0.0-10.0g):</label>
+            <div class="range-slider">
+                <input type="number" id="saturatedFatMin" min="0" max="10" step="0.1" value="0.0" />
+                <input type="range" id="saturatedFatRange" min="0" max="10" value="0" />
+                <input type="number" id="saturatedFatMax" min="0" max="10" step="0.1" value="10.0" />
+            </div>
+        </div>
+        
+        <div class="filter-range">
+            <label for="netCarbs">Net Carbs (0.0-100.0g):</label>
+            <div class="range-slider">
+                <input type="number" id="netCarbsMin" min="0" max="100" step="0.1" value="0.0" />
+                <input type="range" id="netCarbsRange" min="0" max="100" value="0" />
+                <input type="number" id="netCarbsMax" min="0" max="100" step="0.1" value="100.0" />
+            </div>
+        </div>
+
+              <div class="filter-range">
+            <label for="fibre">Fibre (0.0-15.0g):</label>
+            <div class="range-slider">
+                <input type="number" id="fibreMin" min="0" max="15" step="0.1" value="0.0" />
+                <input type="range" id="fibreRange" min="0" max="15" value="0" />
+                <input type="number" id="fibreMax" min="0" max="15" step="0.1" value="15.0" />
+            </div>
+        </div>
+        
+        <div class="filter-range">
+            <label for="freeSugars">Free Sugars (0.0-5.0g):</label>
+            <div class="range-slider">
+                <input type="number" id="freeSugarsMin" min="0" max="5" step="0.1" value="0.0" />
+                <input type="range" id="freeSugarsRange" min="0" max="5" value="0" />
+                <input type="number" id="freeSugarsMax" min="0" max="5" step="0.1" value="5.0" />
+            </div>
+        </div>
+        
+        <div class="filter-range">
+            <label for="protein">Protein (0.0-40.0g):</label>
+            <div class="range-slider">
+                <input type="number" id="proteinMin" min="0" max="40" step="0.1" value="0.0" />
+                <input type="range" id="proteinRange" min="0" max="40" value="0" />
+                <input type="number" id="proteinMax" min="0" max="40" step="0.1" value="40.0" />
+            </div>
+        </div>
+
+              <div class="filter-range">
+            <label for="sodium">Sodium (0.0-1000.0mg):</label>
+            <div class="range-slider">
+                <input type="number" id="sodiumMin" min="0" max="1000" step="1" value="0" />
+                <input type="range" id="sodiumRange" min="0" max="1000" value="0" />
+                <input type="number" id="sodiumMax" min="0" max="1000" step="1" value="1000" />
+            </div>
+        </div>
+        
+        <div class="filter-range">
+            <label for="cholesterol">Cholesterol (0-450mg):</label>
+            <div class="range-slider">
+                <input type="number" id="cholesterolMin" min="0" max="450" step="1" value="0" />
+                <input type="range" id="cholesterolRange" min="0" max="450" value="0" />
+                <input type="number" id="cholesterolMax" min="0" max="450" step="1" value="450" />
+            </div>
+        </div>
+        
+        <div class="filter-range">
+            <label for="ingredients">Ingredients (0-10):</label>
+            <div class="range-slider">
+                <input type="number" id="ingredientsMin" min="0" max="10" step="1" value="0" />
+                <input type="range" id="ingredientsRange" min="0" max="10" value="0" />
+                <input type="number" id="ingredientsMax" min="0" max="10" step="1" value="10" />
+            </div>
+        </div>
+
+              <div class="filter-range">
+            <label for="minutes">Minutes (0-40):</label>
+            <div class="range-slider">
+                <input type="number" id="minutesMin" min="0" max="40" step="1" value="0" />
+                <input type="range" id="minutesRange" min="0" max="40" value="0" />
+                <input type="number" id="minutesMax" min="0" max="40" step="1" value="40" />
+            </div>
+        </div>
+        
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
   
   <div class="search-container">
     <input type="text" id="search" placeholder="Search for recipes..." aria-label="Search recipes" />
@@ -304,6 +443,7 @@
     <div class="tag" onclick="toggleFilter('Clean')">Easy cleaning</div>
   </div>
 
+  <div class="recipe" id="recipe2" data-tag="D NtD DFO GFO">
   <div class="recipe" id="C" data-tag="DF GF NtD LC DO VgtO VgnO">
       <img src="cauliricebowl.png" alt="A bowl with cauliflower rice underneath poached chicken breast, mushrooms and juicy-looking onions, topped with a pepper-seasoned fried egg with an off-white egg white and orange yolk occupying about half its area. The yolk's diameter goes from the middle to one end of the white" class="recipe-image" />
       <div class="recipe-text">
@@ -466,23 +606,89 @@
 
     let activeTags = new Set();
 
-    function toggleFilter(tag) {
-      if (activeTags.has(tag)) {
-        activeTags.delete(tag);
-      } else {
-        activeTags.add(tag);
-      }
-      filterRecipes();
-    }
+        function toggleFilterPanel() {
+            const panel = document.getElementById('filterPanel');
+            panel.classList.toggle('active');
+        }
 
-    function filterRecipes() {
-      const recipes = document.querySelectorAll('.recipe');
-      recipes.forEach(recipe => {
-        const recipeTags = recipe.dataset.tag.split(' ');
-        const isVisible = [...activeTags].some(tag => recipeTags.includes(tag));
-        recipe.style.display = isVisible ? 'flex' : 'none';
-      });
-    }
+        function syncSliders() {
+            const nutrients = [
+                'fat', 'saturatedFat', 'netCarbs', 'fibre', 'freeSugars',
+                'protein', 'sodium', 'cholesterol', 'ingredients', 'minutes'
+            ];
+            nutrients.forEach(nutrient => {
+                const minInput = document.getElementById(`${nutrient}Min`);
+                const maxInput = document.getElementById(`${nutrient}Max`);
+                const rangeInput = document.getElementById(`${nutrient}Range`);
+                minInput.addEventListener('input', () => {
+                    rangeInput.value = minInput.value;
+                });
+                maxInput.addEventListener('input', () => {
+                    rangeInput.value = maxInput.value;
+                });
+        }
+
+                rangeInput.addEventListener('input', () => {
+                    minInput.value = rangeInput.value;
+                    maxInput.value = rangeInput.value;
+                });
+            });
+        }
+
+        function applyFilters() {
+            const fatMin = parseFloat(document.getElementById('fatMin').value);
+            const fatMax = parseFloat(document.getElementById('fatMax').value);
+            const saturatedFatMin = parseFloat(document.getElementById('saturatedFatMin').value);
+            const saturatedFatMax = parseFloat(document.getElementById('saturatedFatMax').value);
+            const netCarbsMin = parseFloat(document.getElementById('netCarbsMin').value);
+            const netCarbsMax = parseFloat(document.getElementById('netCarbsMax').value);
+            const fibreMin = parseFloat(document.getElementById('fibreMin').value);
+            const fibreMax = parseFloat(document.getElementById('fibreMax').value);
+            const freeSugarsMin = parseFloat(document.getElementById('freeSugarsMin').value);
+            const freeSugarsMax = parseFloat(document.getElementById('freeSugarsMax').value);
+            const proteinMin = parseFloat(document.getElementById('proteinMin').value);
+            const proteinMax = parseFloat(document.getElementById('proteinMax').value);
+            const sodiumMin = parseFloat(document.getElementById('sodiumMin').value);
+            const sodiumMax = parseFloat(document.getElementById('sodiumMax').value);
+            const cholesterolMin = parseFloat(document.getElementById('cholesterolMin').value);
+            const cholesterolMax = parseFloat(document.getElementById('cholesterolMax').value);
+            const ingredientsMin = parseInt(document.getElementById('ingredientsMin').value);
+            const ingredientsMax = parseInt(document.getElementById('ingredientsMax').value);
+            const minutesMin = parseInt(document.getElementById('minutesMin').value);
+            const minutesMax = parseInt(document.getElementById('minutesMax').value);
+            const recipes = document.querySelectorAll('.recipe');
+            recipes.forEach(recipe => {
+                const nutritionText = recipe.querySelector('.recipe-text p:nth-of-type(2)').innerText;
+                const nutritionValues = nutritionText.match(/Fat:\s*([\d.]+)g|Saturated fat:\s*([\d.]+)g|Net carbs:\s*([\d.]+)g|Fibre:\s*([\d.]+)g|Free sugars:\s*([\d.]+)g|Protein:\s*([\d.]+)g|Sodium:\s*([\d.]+)mg|Cholesterol:\s*([\d.]+)mg/g;
+                let fat = 0, saturatedFat = 0, netCarbs = 0, fibre = 0, freeSugars = 0, protein = 0, sodium = 0, cholesterol = 0;
+                nutritionValues.forEach(value => {
+                    const match = value.match(/([\d.]+)/);
+                    if (match) {
+                        if (value.includes('Fat')) fat = parseFloat(match[0]);
+                        else if (value.includes('Saturated fat')) saturatedFat = parseFloat(match[0]);
+                        else if (value.includes('Net carbs')) netCarbs = parseFloat(match[0]);
+                        else if (value.includes('Fibre')) fibre = parseFloat(match[0]);
+                        else if (value.includes('Free sugars')) freeSugars = parseFloat(match[0]);
+                        else if (value.includes('Protein')) protein = parseFloat(match[0]);
+                        else if (value.includes('Sodium')) sodium = parseFloat(match[0]);
+                        else if (value.includes('Cholesterol')) cholesterol = parseFloat(match[0]);
+                    }
+                });
+
+              const meetsCriteria = (
+                    fat >= fatMin && fat <= fatMax &&
+                    saturatedFat >= saturatedFatMin && saturatedFat <= saturatedFatMax &&
+                    netCarbs >= netCarbsMin && netCarbs <= netCarbsMax &&
+                    fibre >= fibreMin && fibre <= fibreMax &&
+                    freeSugars >= freeSugarsMin && freeSugars <= freeSugarsMax &&
+                    protein >= proteinMin && protein <= proteinMax &&
+                    sodium >= sodiumMin && sodium <= sodiumMax &&
+                    cholesterol >= cholesterolMin && cholesterol <= cholesterolMax
+                );
+                recipe.style.display = meetsCriteria ? 'block' : 'none';
+            });
+        }
+        syncSliders();
   </script>
 </body>
 </html>
