@@ -234,6 +234,11 @@
     .tag:hover {
       background-color: #cc512d;
     }
+    .tag.active {
+    background-color: #4caf50;
+    color: white;
+}
+
 
     .recipe-tags {
       margin-top: 0.5rem;
@@ -401,7 +406,7 @@
             </div>
         </div>
         
-        <button onclick="applyFilters()">Apply Filters</button>
+       <button onclick="applyFilters()">Apply Filters</button>
     </div>
   
   <div class="search-container">
@@ -438,7 +443,8 @@
   </nav>
 
   <div class="tags">
-    <div class="tag" onclick="toggleFilter('Vgt')">Vegt</div>
+    
+    <div class="tag" onclick="toggleTags('Vgt')">Vegt</div>
     <div class="tag" onclick="toggleFilter('VgtO')">Can be vegt</div>
     <div class="tag" onclick="toggleFilter('Vgn')">Vgn</div>
     <div class="tag" onclick="toggleFilter('VgnO')">Can be vgn</div>
@@ -549,14 +555,14 @@
         <p>A quick and easy dessert made in the microwave with a banaNANA</p>
         <p>191 kcal| Fat: 5.9g| Saturated fat: 1.6g|  Net carbs: 25.2g| Fibre: 3.2g| Free sugars: 0g| Protein: 8.1g| Sodium: 315mg| Cholesterol: 185 mg</p>
         <div class="recipe-tags">
-          <span class="tag">Vegt</span>
-          <span class="tag">Dairy-free</span>
-          <span class="tag">Can have dairy</span>
-          <span class="tag">Nutrient-dense</span>
-          <span class="tag">Under 5 minutes of non-idleness</span>
-          <span class="tag">Easy cleaning</span>
-          <span class="tag">Can be GF</span>
-          <span class="tag">Can be vgn</span>          
+                <span class="tag" onclick="toggleTags('Vgt')">Vegt</span>
+                <span class="tag" onclick="toggleTags('DF')">Dairy-free</span>
+                <span class="tag" onclick="toggleTags('DO')">Can have dairy</span>
+                <span class="tag" onclick="toggleTags('NtD')">Nutrient-dense</span>
+                <span class="tag" onclick="toggleTags('Idle')">Under 5 minutes of non-idleness</span>
+                <span class="tag" onclick="toggleTags('Clean')">Easy cleaning</span>
+                <span class="tag" onclick="toggleTags('GFO')">Can be GF</span>
+                <span class="tag" onclick="toggleTags('VgnO')">Can be vgn</span>      
         </div>
       </div>
     </div>
@@ -617,11 +623,13 @@
 
 let activeTags = new Set();
 
-function toggleTags(tag) {
+function toggleTags(tag, element) {
     if (activeTags.has(tag)) {
         activeTags.delete(tag);
+        element.classList.remove('active');
     } else {
         activeTags.add(tag);
+        element.classList.add('active');
     }
     filterRecipesByTags();
 }
@@ -630,34 +638,43 @@ function filterRecipesByTags() {
     const recipes = document.querySelectorAll('.recipe');
     recipes.forEach(recipe => {
         const recipeTags = recipe.getAttribute('data-tag').split(' ');
-        const matches = Array.from(activeTags).some(tag => recipeTags.includes(tag));
+        const matches = activeTags.size === 0 || Array.from(activeTags).every(tag => recipeTags.includes(tag));
         recipe.style.display = matches ? 'flex' : 'none';
     });
 }
 
-        function syncSliders() {
-            const nutrients = [
-                'fat', 'saturatedFat', 'netCarbs', 'fibre', 'freeSugars',
-                'protein', 'sodium', 'cholesterol', 'ingredients', 'minutes'
-            ];
-            nutrients.forEach(nutrient => {
-                const minInput = document.getElementById(`${nutrient}Min`);
-                const maxInput = document.getElementById(`${nutrient}Max`);
-                const rangeInput = document.getElementById(`${nutrient}Range`);
-                minInput.addEventListener('input', () => {
-                    rangeInput.value = minInput.value;
-                });
-                maxInput.addEventListener('input', () => {
-                    rangeInput.value = maxInput.value;
-                });
-        }
 
-                rangeInput.addEventListener('input', () => {
-                    minInput.value = rangeInput.value;
-                    maxInput.value = rangeInput.value;
-                });
-            });
-        }
+    function toggleFilterPanel() {
+    const filterPanel = document.getElementById('filterPanel');
+    filterPanel.classList.toggle('active');
+}
+
+
+       function syncSliders() {
+    const nutrients = [
+        'fat', 'saturatedFat', 'netCarbs', 'fibre', 'freeSugars',
+        'protein', 'sodium', 'cholesterol', 'ingredients', 'minutes'
+    ];
+    nutrients.forEach(nutrient => {
+        const minInput = document.getElementById(`${nutrient}Min`);
+        const maxInput = document.getElementById(`${nutrient}Max`);
+        const rangeInput = document.getElementById(`${nutrient}Range`);
+        
+        minInput.addEventListener('input', () => {
+            rangeInput.value = minInput.value;
+        });
+        
+        maxInput.addEventListener('input', () => {
+            rangeInput.value = maxInput.value;
+        });
+        
+        rangeInput.addEventListener('input', () => {
+            minInput.value = rangeInput.value;
+            maxInput.value = rangeInput.value;
+        });
+    });
+}
+
 
         function applyFilters() {
             const fatMin = parseFloat(document.getElementById('fatMin').value);
