@@ -615,12 +615,25 @@
       });
     });
 
-    let activeTags = new Set();
+let activeTags = new Set();
 
-        function toggleFilterPanel() {
-            const panel = document.getElementById('filterPanel');
-            panel.classList.toggle('active');
-        }
+function toggleTags(tag) {
+    if (activeTags.has(tag)) {
+        activeTags.delete(tag);
+    } else {
+        activeTags.add(tag);
+    }
+    filterRecipesByTags();
+}
+
+function filterRecipesByTags() {
+    const recipes = document.querySelectorAll('.recipe');
+    recipes.forEach(recipe => {
+        const recipeTags = recipe.getAttribute('data-tag').split(' ');
+        const matches = Array.from(activeTags).some(tag => recipeTags.includes(tag));
+        recipe.style.display = matches ? 'flex' : 'none';
+    });
+}
 
         function syncSliders() {
             const nutrients = [
